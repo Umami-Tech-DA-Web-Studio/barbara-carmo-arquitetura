@@ -760,3 +760,78 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Notion:** documento filho existente verificado; coluna própria preenchida e leitura de volta concluída; somente o prospecto efetivamente concluído foi marcado.
 - **Publicação, push, commit, deploy e contato:** não realizados.
 - **Maturidade:** protótipo/QA local; não eleva maturidade comercial, regulatória ou de produção.
+
+---
+
+# 17. Publicação controlada em preview — GitHub e Cloudflare
+
+## REG-011 — Criação do repositório local e GitHub
+
+- **Etapa universal:** execução controlada / documentação contínua.
+- **Data/hora:** 16/08/2026, horário do registro desta execução.
+- **Responsável:** Hermes.
+- **Objetivo:** materializar o projeto local como repositório versionado para permitir validação externa controlada.
+- **Caminho local:** `/Users/raphael/Documents/Umami Tech/Método de Sites/2 - Documentações por projeto/Trilha A - Sites profissionais/Projeto - Barbara Carmo Arquitetura - Prospecção/`.
+- **O que foi feito:** inicializado Git na pasta do projeto, criado commit inicial e criado/pushado repositório privado na organização `Umami-Tech-DA-Web-Studio`.
+- **Repositório:** https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura
+- **Commit inicial:** `b0d2177`.
+- **Resultado observado:** branch `main` criada e sincronizada com `origin/main`; working tree limpa.
+- **Critério de aprovação:** repo remoto existente, privado, com código e documentação locais versionados.
+- **Status:** concluído.
+
+## REG-012 — Preview Cloudflare Pages
+
+- **Etapa universal:** execução controlada / revisão pré-entrega.
+- **Objetivo:** publicar apenas o exercício fictício em ambiente temporário para validação externa.
+- **Conta confirmada:** `Raphaelsfigueira@gmail.com's Account` — ID `16f7b7dc3d39bc14aba372a155d7bf19`; Wrangler 4.123.0; escopo `pages:write`.
+- **O que foi feito:** criado o projeto Cloudflare Pages `barbara-carmo-arquitetura` com branch de produção `preview`; deploy realizado a partir de `opendesign/mockups/barbara-carmo-prospeccao/`.
+- **URL estável de validação:** https://barbara-carmo-arquitetura.pages.dev/
+- **URL hash retornada pelo deploy:** `https://2edfd839.barbara-carmo-arquitetura.pages.dev`; esse alias apresentou falha TLS em `curl`/navegação e não foi usado como evidência de aprovação.
+- **Resultado observado:** URL base respondeu HTTP `200`; resposta incluiu `server: cloudflare`, `x-content-type-options: nosniff` e `referrer-policy: strict-origin-when-cross-origin`.
+- **Governança:** preview contém `noindex,nofollow`, aviso de exercício, conteúdo fictício e nenhum envio/armazenamento de dados.
+- **Status:** concluído como preview; não é publicação comercial.
+
+## TEST-015 — E2E e auditoria do preview externo
+
+| Categoria | Resultado | Evidência |
+|---|---|---|
+| HTTP/carregamento | **PASS** | HTTP `200` em `https://barbara-carmo-arquitetura.pages.dev/`. |
+| Desktop | **PASS** | Playwright Chromium em `1440×900`; `scrollWidth=1440`, `innerWidth=1440`. |
+| Mobile | **PASS** | Playwright Chromium em `390×844`; `scrollWidth=390`, `innerWidth=390`. |
+| Console/page errors/rede | **PASS** | zero erros de console, zero `pageerror` e zero requests falhos nos dois viewports. |
+| SEO/governança | **PASS** | title presente, `lang=pt-BR`, `robots=noindex, nofollow`, `main` e `h1` presentes. |
+| Filtro/estado vazio/reset | **PASS** | filtro `Explorações` mostrou “Nenhuma cena nesta seleção”; reset restaurou 4 cards. |
+| Modal | **PASS** | Pátio Norte abriu e fechou pelo botão de diálogo. |
+| Formulário | **PASS no escopo demonstrativo** | submissão vazia mostrou mensagem de revisão; nenhuma requisição foi enviada. |
+| Menu móvel | **PASS** | menu abriu com `aria-expanded=true` e classe `is-open`. |
+| Reduced motion | **PASS no contexto emulado** | Playwright emitiu `prefers-reduced-motion: reduce`. |
+| Auditoria visual desktop/mobile | **PASS para exercício** | screenshots revisados; hierarquia, espaçamento, placeholders e aviso de exercício observáveis; sem bloqueador visual identificado. |
+
+- **Problema encontrado:** o primeiro script E2E usou `expect()` incompatível com objeto `Response` e depois uma asserção incorreta de `checkValidity()` em formulário `novalidate`.
+- **Correção:** corrigido somente o harness de teste; nenhum código do site foi alterado.
+- **Reteste:** segunda execução Playwright concluída com exit code `0` nos dois viewports e todos os fluxos acima.
+- **Limite:** auditoria visual e E2E validam o exercício publicado; não aprovam identidade, conteúdo real, CAU, assets, preço ou publicação comercial.
+- **Status:** concluído para o preview.
+
+## DEC-010 — Status de entrega controlada
+
+- **Decisão:** registrar o projeto como `projeto gerado - aguardando validação` nas informações do Notion.
+- **Motivo:** existe repo local/GitHub, preview Cloudflare e QA externo com evidência; ainda não existe validação da profissional, autorização comercial, conteúdo final, identidade aprovada ou publicação oficial.
+- **Preço sugerido:** não definido nesta rodada; qualquer valor depende de escopo, briefing, conteúdo, assets, integrações e aprovação comercial.
+- **Status:** aprovada para registro no Notion.
+
+## PEND-011 — Validação comercial e conteúdo autorizado
+
+- **Tipo:** autorização / conteúdo / compliance / preço.
+- **Itens:** validação da profissional, identidade e assets, serviços reais, eventual CAU, depoimentos, copy final, privacidade, domínio oficial, proposta/preço e autorização de publicação.
+- **Impacto:** impede tratar o preview como site comercial ou produção.
+- **Status:** aberto.
+
+## Fechamento pós-preview
+
+- **Status operacional:** projeto gerado — aguardando validação.
+- **Repo local:** criado e versionado.
+- **Repo GitHub:** criado e sincronizado.
+- **Preview Cloudflare:** criado e auditado no domínio base.
+- **Notion:** registro de prospecção e página completa do projeto devem conter links, status, evidências e preço não definido.
+- **Publicação comercial/contato:** não realizados.
