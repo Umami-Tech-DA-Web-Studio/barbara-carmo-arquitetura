@@ -835,3 +835,41 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Preview Cloudflare:** criado e auditado no domínio base.
 - **Notion:** registro de prospecção e página completa do projeto devem conter links, status, evidências e preço não definido.
 - **Publicação comercial/contato:** não realizados.
+
+---
+
+## REG-013 — Conta Cloudflare canônica e solicitação de redesign premium
+
+- **Etapa universal:** definição / revisão pré-entrega
+- **Serviços:** S-04, S-10, S-11
+- **Data e hora:** 16/08/2026, após 19:22 -03
+- **Responsável:** Hermes
+- **Objetivo:** registrar a correção da conta Cloudflare e a decisão do titular de exigir pesquisa de referências, imagens premium, análise de logomarca e redesign separado.
+- **Insumos:** feedback humano sobre o protótipo Barbara; `wrangler whoami`; checklist premium; fluxo de redesign.
+- **O que foi feito:** autenticação oficial do Wrangler foi refeita; confirmação atual retornou `umamitech1@gmail.com`, Account ID `24da8c756c6d6b7702b238034329966a`; a conta correta contém Pages `gestor-gastro`, enquanto o preview Barbara histórico permanece na conta anterior; jobs de geração e redesign foram atualizados/criados sem apagar o preview anterior.
+- **Decisão tomada:** todo novo deploy deve validar essa conta; Barbara não será migrada ou apagada automaticamente; o protótipo será tratado como candidato a redesign premium quando houver gatilho explícito no Notion.
+- **Resultado observado:** pipeline documentada com dez referências de nicho, coleta pública controlada, imagens sem placeholder, análise de logo, gate premium e job separado de redesign.
+- **Problema ou bloqueio:** provedor de geração de imagens ainda não foi escolhido/configurado; hardware local M4/16 GB foi classificado como `marginal` para ComfyUI. Migração dos previews antigos está pendente.
+- **Correção/reteste:** `wrangler whoami` repetido e confirmado; monitores de geração/redesign e lock global testados.
+- **Evidência:** saída do Wrangler; jobs `b50f93924f9d` e `cd2811dd6635`; checklist e fluxo em `4 - Modelos e checklists`.
+- **Critério de aprovação:** conta correta autenticada, jobs ativos, monitores determinísticos e documentação atualizada.
+- **Tempo de execução:** registrado na sessão operacional
+- **Espera interna:** 0
+- **Espera do cliente:** decisão sobre migração e provedor de imagens pendente
+- **Retrabalho:** atualização da automação e documentação
+- **Aprendizado:** E2E funcional não deve encerrar um projeto cuja direção visual foi rejeitada; a percepção do titular é gatilho válido para S-10.
+- **Status:** concluído como ajuste operacional; redesign da Barbara ainda não executado.
+
+## PEND-012 — Migração/republicação na conta Cloudflare correta
+
+- **Tipo:** infraestrutura / decisão
+- **Impacto:** os previews históricos Barbara e MGoiz não estão comprovadamente na conta canônica atual.
+- **Próxima ação:** decidir se devem ser republicados na conta `umamitech1@gmail.com`; não apagar os projetos da conta anterior sem autorização separada.
+- **Status:** aberto.
+
+## PEND-013 — Provedor de geração de imagens premium
+
+- **Tipo:** acesso / ferramenta / custo
+- **Impacto:** impede cumprir o gate de imagens geradas quando não houver asset autorizado.
+- **Próxima ação:** escolher ComfyUI local/cloud ou outro provedor, com custo, direitos, credencial fora do projeto e teste controlado.
+- **Status:** bloqueante para áreas de imagem; aberto.
