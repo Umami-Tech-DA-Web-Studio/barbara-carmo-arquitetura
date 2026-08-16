@@ -1,0 +1,19 @@
+{
+  "generated": "2026-08-16T09:48:05-03:00",
+  "sections": [
+    {
+      "id": "mockups",
+      "label": "Mockups",
+      "groups": [
+        {
+          "slug": "barbara-carmo-prospeccao",
+          "files": [
+            { "label": "index.html", "path": "mockups/barbara-carmo-prospeccao/index.html" },
+            { "label": "styles.css", "path": "mockups/barbara-carmo-prospeccao/styles.css" },
+            { "label": "app.js", "path": "mockups/barbara-carmo-prospeccao/app.js" }
+          ]
+        }
+      ]
+    }
+  ]
+}
