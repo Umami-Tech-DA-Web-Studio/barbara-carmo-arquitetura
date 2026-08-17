@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-16T09:48:05-03:00",
+  "generated": "2026-08-17T02:20:54.849665+00:00",
   "sections": [
     {
       "id": "mockups",
@@ -8,9 +8,24 @@
         {
           "slug": "barbara-carmo-prospeccao",
           "files": [
-            { "label": "index.html", "path": "mockups/barbara-carmo-prospeccao/index.html" },
-            { "label": "styles.css", "path": "mockups/barbara-carmo-prospeccao/styles.css" },
-            { "label": "app.js", "path": "mockups/barbara-carmo-prospeccao/app.js" }
+            {"label":"app.js","path":"mockups/barbara-carmo-prospeccao/app.js"},
+            {"label":"favicon.svg","path":"mockups/barbara-carmo-prospeccao/favicon.svg"},
+            {"label":"index.html","path":"mockups/barbara-carmo-prospeccao/index.html"},
+            {"label":"styles.css","path":"mockups/barbara-carmo-prospeccao/styles.css"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-systems",
+      "label": "Design Systems",
+      "groups": [
+        {
+          "slug": "barbara-carmo-editorial",
+          "files": [
+            {"label":"README.md","path":"design-systems/barbara-carmo-editorial/README.md"},
+            {"label":"SKILL.md","path":"design-systems/barbara-carmo-editorial/SKILL.md"},
+            {"label":"colors_and_type.css","path":"design-systems/barbara-carmo-editorial/tokens/colors_and_type.css"}
           ]
         }
       ]

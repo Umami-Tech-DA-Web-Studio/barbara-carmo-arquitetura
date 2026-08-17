@@ -1,0 +1,34 @@
+/* Barbara Carmo Arquitetura — direção editorial mineral, preview exploratório.
+   Tokens específicos deste projeto; não são o design system global da Umami Tech. */
+:root {
+  --fg-1: #1c2b27;
+  --fg-2: #5d6861;
+  --bg-1: #f1ede3;
+  --bg-2: #e4ddcf;
+  --accent-1: #b45e43;
+  --accent-2: #874331;
+  --surface-inverse: #1c2b27;
+  --surface-paper: #fbf8f0;
+  --border-subtle: rgba(28, 43, 39, .22);
+  --border-strong: rgba(28, 43, 39, .55);
+  --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+  --weight-regular: 400;
+  --weight-medium: 600;
+  --h1: clamp(3.45rem, 7.3vw, 7rem);
+  --h2: clamp(3rem, 6vw, 5.75rem);
+  --h3: 2rem;
+  --body: 1rem;
+  --small: .75rem;
+  --caption: .625rem;
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 5rem;
+  --radius-pill: 999px;
+  --radius-none: 0;
+  --shadow-soft: 0 25px 80px rgba(28, 43, 39, .24);
+}

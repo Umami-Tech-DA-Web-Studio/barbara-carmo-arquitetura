@@ -12,7 +12,7 @@
 **Linha candidata:** Presença + Autoridade + Captação  
 **Serviços candidatos:** S-03 Arquitetura e jornada; S-04 Design system e direção visual; S-06 Site institucional multipáginas; S-11 SEO local, performance e acessibilidade; S-12 Captação, privacidade, cookies e analytics  
 **Data de início do planejamento:** 16/08/2026 09:43 BRT  
-**Status:** Em planejamento — exercício/prospecção; desenvolvimento não iniciado
+**Status:** Redesign executado em preview noindex; aguardando validação humana e conteúdo/autorização real
 
 > Este documento é uma hipótese operacional baseada somente em fontes públicas e não representa briefing aprovado, proposta aceita, contrato, autorização de uso de marca/imagens ou contato com a profissional.
 
@@ -783,8 +783,8 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 
 - **Etapa universal:** execução controlada / revisão pré-entrega.
 - **Objetivo:** publicar apenas o exercício fictício em ambiente temporário para validação externa.
-- **Conta confirmada:** `Raphaelsfigueira@gmail.com's Account` — ID `16f7b7dc3d39bc14aba372a155d7bf19`; Wrangler 4.123.0; escopo `pages:write`.
-- **O que foi feito:** criado o projeto Cloudflare Pages `barbara-carmo-arquitetura` com branch de produção `preview`; deploy realizado a partir de `opendesign/mockups/barbara-carmo-prospeccao/`.
+- **Conta observada na publicação histórica:** `Raphaelsfigueira@gmail.com's Account` — ID `16f7b7dc3d39bc14aba372a155d7bf19`; esse é o registro histórico da primeira publicação e não a conta canônica atual.
+- **O que foi feito:** criado o projeto Cloudflare Pages `barbara-carmo-arquitetura` com branch de produção `preview`; deploy histórico realizado a partir de `opendesign/mockups/barbara-carmo-prospeccao/`.
 - **URL estável de validação:** https://barbara-carmo-arquitetura.pages.dev/
 - **URL hash retornada pelo deploy:** `https://2edfd839.barbara-carmo-arquitetura.pages.dev`; esse alias apresentou falha TLS em `curl`/navegação e não foi usado como evidência de aprovação.
 - **Resultado observado:** URL base respondeu HTTP `200`; resposta incluiu `server: cloudflare`, `x-content-type-options: nosniff` e `referrer-policy: strict-origin-when-cross-origin`.
@@ -846,10 +846,10 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Responsável:** Hermes
 - **Objetivo:** registrar a correção da conta Cloudflare e a decisão do titular de exigir pesquisa de referências, imagens premium, análise de logomarca e redesign separado.
 - **Insumos:** feedback humano sobre o protótipo Barbara; `wrangler whoami`; checklist premium; fluxo de redesign.
-- **O que foi feito:** autenticação oficial do Wrangler foi refeita; confirmação atual retornou `umamitech1@gmail.com`, Account ID `24da8c756c6d6b7702b238034329966a`; a conta correta contém Pages `gestor-gastro`, enquanto o preview Barbara histórico permanece na conta anterior; jobs de geração e redesign foram atualizados/criados sem apagar o preview anterior.
+- **O que foi feito:** autenticação oficial do Wrangler foi refeita; confirmação atual retornou [e-mail redigido], Account ID `24da8c756c6d6b7702b238034329966a`; a conta correta contém Pages `gestor-gastro`, enquanto o preview Barbara histórico permanece na conta anterior; jobs de geração e redesign foram atualizados/criados sem apagar o preview anterior.
 - **Decisão tomada:** todo novo deploy deve validar essa conta; Barbara não será migrada ou apagada automaticamente; o protótipo será tratado como candidato a redesign premium quando houver gatilho explícito no Notion.
 - **Resultado observado:** pipeline documentada com dez referências de nicho, coleta pública controlada, imagens sem placeholder, análise de logo, gate premium e job separado de redesign.
-- **Problema ou bloqueio:** provedor de geração de imagens ainda não foi escolhido/configurado; hardware local M4/16 GB foi classificado como `marginal` para ComfyUI. Migração dos previews antigos está pendente.
+- **Problema ou bloqueio:** ComfyUI local foi instalado e o servidor MPS passou; o teste de geração aguardava o checkpoint SD 1.5. Migração dos previews antigos está pendente.
 - **Correção/reteste:** `wrangler whoami` repetido e confirmado; monitores de geração/redesign e lock global testados.
 - **Evidência:** saída do Wrangler; jobs `b50f93924f9d` e `cd2811dd6635`; checklist e fluxo em `4 - Modelos e checklists`.
 - **Critério de aprovação:** conta correta autenticada, jobs ativos, monitores determinísticos e documentação atualizada.
@@ -863,13 +863,151 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 ## PEND-012 — Migração/republicação na conta Cloudflare correta
 
 - **Tipo:** infraestrutura / decisão
-- **Impacto:** os previews históricos Barbara e MGoiz não estão comprovadamente na conta canônica atual.
-- **Próxima ação:** decidir se devem ser republicados na conta `umamitech1@gmail.com`; não apagar os projetos da conta anterior sem autorização separada.
-- **Status:** aberto.
+- **Impacto:** os previews históricos Barbara e MGoiz foram criados na conta anterior; a republicação canônica foi necessária para validação atual.
+- **Próxima ação:** preservar os projetos antigos; usar somente os aliases canônicos atuais para novos QA/deploys.
+- **Status:** resolvido para os previews Barbara e MGoiz; produção/domínio oficial continuam bloqueados.
 
 ## PEND-013 — Provedor de geração de imagens premium
 
 - **Tipo:** acesso / ferramenta / custo
 - **Impacto:** impede cumprir o gate de imagens geradas quando não houver asset autorizado.
-- **Próxima ação:** escolher ComfyUI local/cloud ou outro provedor, com custo, direitos, credencial fora do projeto e teste controlado.
-- **Status:** bloqueante para áreas de imagem; aberto.
+- **Próxima ação:** concluir smoke test do ComfyUI local com checkpoint leve; manter critério de bloqueio se o gerador não estiver disponível.
+- **Status:** resolvido para infraestrutura; geração e aprovação semântica de assets permanecem sob gate por projeto.
+
+## REG-015 — Republicação dos previews na conta Cloudflare canônica
+
+- **Etapa universal:** execução controlada / revisão pré-entrega.
+- **Data/hora:** 16/08/2026 22:52–22:56 -03.
+- **Responsável:** Hermes.
+- **Objetivo:** migrar os previews sem apagar os projetos históricos da conta anterior.
+- **Conta canônica verificada:** [e-mail redigido], Account ID `24da8c756c6d6b7702b238034329966a`, Wrangler `4.123.0`, escopo `pages:write`.
+- **Barbara:** projeto `barbara-carmo-arquitetura` criado na conta canônica; alias `https://preview.barbara-carmo-arquitetura-4ga.pages.dev/`; deployment `https://09b2bb73.barbara-carmo-arquitetura-4ga.pages.dev`.
+- **O que foi verificado:** os dois hosts responderam HTTP `200`, com `noindex,nofollow`, conteúdo Barbara e aviso de exercício.
+- **Decisão:** os projetos históricos não foram apagados; produção, DNS e domínio oficial continuam bloqueados.
+- **Notion:** página atualizada com os aliases canônicos e o marcador `REDESIGN-SOLICITADO`.
+- **Critério de aprovação:** conta efetiva confirmada, Pages listado, deploy concluído e host externo verificado.
+- **Status:** concluído como migração de preview.
+
+## REG-016 — ComfyUI no SSD externo, limites e monitoramento
+
+- **Etapa universal:** execução controlada / revisão pré-entrega.
+- **Data/hora:** 16/08/2026 22:40–23:05 -03.
+- **Objetivo:** reduzir pressão no disco interno e limitar impacto sobre os demais sistemas.
+- **Workspace canônico:** `/Volumes/Workspace/Umami-Tech/comfy`; symlink de compatibilidade em `/Users/raphael/Documents/comfy`.
+- **Armazenamento observado:** SSD Workspace com aproximadamente `832 GiB` livres; disco interno com aproximadamente `26 GiB` livres após remoção do backup validado.
+- **Launcher:** `comfyui_start_safe.sh` com `--lowvram`, `--cpu-vae`, `--cache-none`, `--vram-headroom 4` e `--reserve-vram 4`.
+- **Monitor:** `comfyui_resource_monitor.py`, histórico em `resource-monitor/usage.jsonl`, watchdog cron `683d76dfedeb` a cada 15 minutos.
+- **Teste real:** servidor iniciou pelo workspace externo com device `mps`; health check passou; geração externa `ac145555-e5f8-417d-95c7-4b66524c7b22` produziu PNG RGB 512×512 de `497820` bytes.
+- **Avaliação do asset:** gate técnico `pass`, mas revisão visual classificou o smoke como semanticamente desalinhado para arquitetura — paisagem genérica; não foi inserido em Barbara.
+- **Correção/reteste:** detecção de processo do monitor ajustada para o comando real `main.py`; amostra registrada com RSS, CPU, RAM/VRAM e espaço do SSD.
+- **Decisão:** OrbStack não será usado como runtime padrão, pois não oferece melhor controle de memória unificada/MPS neste ambiente.
+- **Status:** infraestrutura concluída; assets de Barbara aguardam geração específica e avaliação por proposta.
+
+## REG-014 — Smoke test real de geração de imagem local
+
+- **Etapa universal:** execução controlada / revisão pré-entrega
+- **Serviço:** S-04, S-10, S-11
+- **Data e hora:** 16/08/2026, após 20:15 -03
+- **Responsável:** Hermes
+- **Objetivo:** comprovar que a automação possui um caminho gratuito de geração de imagem sem inserir o resultado no site Barbara.
+- **Insumos:** ComfyUI local, MPS, checkpoint `v1-5-pruned-emaonly.safetensors`, workflow SD 1.5 API.
+- **O que foi feito:** health check passou; uma imagem 512×512 foi gerada com 20 steps, seed `20260816` e prompt editorial arquitetônico; PNG foi validado por tipo, dimensão, tamanho e SHA-256.
+- **Resultado observado:** `status=success`, prompt_id `8629db71-3a4e-4d49-98a8-bd4dfa410eae`, PNG RGB 512×512, 367241 bytes, SHA-256 `468b10a3fdb52ce608d5b7cefe16cd428b177ed6609c58ac8f55f9da67f1dd58`; inspeção visual sem texto/logo e com composição/material/luz coerentes.
+- **Problema:** o smoke test inicial falhou por metadado `_comment` incompatível com o formato API; a skill foi corrigida e o reteste passou.
+- **Correção e reteste:** removido `_comment` de nível superior; geração repetida com sucesso; servidor desligado após o teste para liberar memória.
+- **Evidência:** `/private/tmp/umami-comfy-smoke/sd15_00001_.png` durante a sessão; logs locais do ComfyUI; health check `pass`.
+- **Critério de aprovação:** infraestrutura de geração local comprovada; qualidade de cada asset e adequação ao nicho continuam gates separados.
+- **Aprendizado:** SD 1.5 é um caminho técnico gratuito viável no M4/16 GB, mas não deve ser confundido com direção premium ou imagem oficial do cliente.
+- **Status:** concluído como teste de infraestrutura; nenhum asset foi inserido no projeto.
+
+---
+
+## REG-017 — Baseline e triagem do redesign
+
+- **Etapa:** auditoria de ativos / pré-requisitos.
+- **Data/hora:** 17/08/2026, BRT.
+- **Responsável:** Hermes.
+- **Objetivo:** congelar estado antes da alteração e confirmar gatilho explícito `REDESIGN-SOLICITADO`.
+- **Insumos:** Notion data source `e342ea91-475c-41fd-b71d-401bae2218a1`; página `3be24a4d060a81ea960af31dced6ee03`; repositório privado `Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura`; preview histórico; protótipo local.
+- **Baseline:** clone em `/tmp/barbara-carmo-arquitetura-baseline`, commit `673147133a7cbdc13c77cab9022481e21833f836`; servidor local `127.0.0.1:8292`; baseline visual e DOM consultados antes da edição.
+- **Achados:** direção anterior dependia de formas abstratas/placeholder, tinha hierarquia menos diferenciada e não tinha assets de arquitetura avaliados; não houve console error observado na abertura inicial.
+- **Decisão:** executar S-10 com direção própria editorial mineral, preservar limites de preview, noindex e sem contato.
+- **Evidência:** `testes/redesign-02/` e cópia baseline em `/tmp/barbara-carmo-arquitetura-baseline`.
+- **Status:** concluído.
+
+## REG-018 — Pesquisa de dez referências públicas e direção própria
+
+- **Etapa:** definição e congelamento.
+- **Data/hora:** 17/08/2026, BRT.
+- **Responsável:** Hermes.
+- **Objetivo:** reabrir pesquisa do nicho sem copiar identidade ou layout identificável.
+- **O que foi feito:** registradas exatamente dez referências públicas em `referencias/inspiracoes-10.md`, com URL, observações de arquitetura/SEO superficial, CTA/jornada, visual, imagem, adaptação e risco.
+- **Decisão:** direção `editorial mineral / silêncio material`; verde profundo, papel quente, argila; serif para títulos, sans para interface e mono para metadados.
+- **Limitações:** quatro fontes tiveram falha técnica na consulta; foram mantidas explicitamente como pendentes, sem preencher lacunas por suposição.
+- **Status:** concluído.
+
+## REG-019 — Assets gerados e avaliados antes da inserção
+
+- **Etapa:** execução controlada.
+- **Data/hora:** 17/08/2026, BRT.
+- **Responsável:** Hermes.
+- **Objetivo:** substituir placeholders por imagens de direção sem usar obras, fotos ou marcas de terceiros.
+- **O que foi feito:** ComfyUI local em workspace externo `/Users/raphael/Documents/comfy`, servidor 0.33.0/MPS, workflow SD 1.5; três PNGs gerados com seeds `184203`, `184204`, `184205`.
+- **Assets:** `assets/generated/barbara-hero_00001_.png` 768×512; `barbara-interior_00001_.png` 512×512; `barbara-courtyard_00001_.png` 512×512.
+- **Avaliação:** sem pessoas, texto, logos ou marcas d’água; composição adequada à proposta editorial mineral; registro completo em `referencias/assets-gerados.md`.
+- **Decisão:** aprovados somente para preview exploratório e sempre marcados como imagem gerada/não representativa de obra real.
+- **Status:** concluído com limitação de direitos/uso comercial ainda pendente.
+
+## DEC-006 — Redesign reversível e conteúdo protegido
+
+- **Etapa:** definição / execução.
+- **Decisão:** manter conteúdo como hipótese identificada; não inserir CAU, prova social, preço, prazo, telefone, WhatsApp, claims regulados ou logo oficial. Usar monograma `BC` apenas como conceito exploratório visível no aviso de preview.
+- **Implementação:** HTML/CSS/JS reescritos de forma reversível; cache-buster `redesign-02`; filtros, modal, menu mobile e formulário demonstrativo preservados sem envio.
+- **Status:** concluído; validação humana pendente.
+
+## TEST-016 — QA local Chromium 1440×900 e 390×844
+
+- **Etapa:** revisão pré-entrega.
+- **Data/hora:** 17/08/2026, BRT.
+- **Ferramenta:** Playwright Chromium 1.62.1, viewport real desktop 1440×900 e mobile 390×844, `prefers-reduced-motion: reduce`.
+- **Cenários:** carregamento; filtros e estado vazio; restauração do filtro; abertura/fechamento de modal com imagem; menu móvel; formulário inválido; formulário válido demonstrativo; verificação de requests.
+- **Resultado:** 2 execuções concluídas; 0 console errors; 0 pageerrors; 0 requestfailed; `scrollWidth == innerWidth` em ambos; 1 H1; `lang=pt-BR`; `robots=noindex,nofollow`; todas as 6 imagens com `naturalWidth > 0`, alt e `object-fit: cover`; request delta do formulário `0`.
+- **Evidência:** `testes/redesign-02/summary.json`, `desktop-clean.png`, `mobile-clean.png`, `desktop.png`, `mobile.png`.
+- **Status:** aprovado localmente.
+
+## REG-020 — Deploy de preview na conta Cloudflare canônica
+
+- **Etapa:** execução controlada / entrega de preview.
+- **Data/hora:** 17/08/2026, BRT.
+- **Pré-requisito:** `npx --yes wrangler@latest whoami` confirmou `umamitech1@gmail.com`, Account ID `24da8c756c6d6b7702b238034329966a`, Wrangler `4.123.0`, `pages:write`.
+- **Deploy:** projeto Pages `barbara-carmo-arquitetura`, branch `redesign-20260817`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`; deployment `https://0bf5f156.barbara-carmo-arquitetura-4ga.pages.dev`.
+- **Proteções:** `noindex,nofollow`, `robots.txt` com `Disallow: /`, nenhum domínio oficial, nenhuma publicação de produção, nenhuma mensagem.
+- **Verificação externa:** home, robots, CSS e PNG responderam HTTP 200; Playwright externo em 1440×900 e 390×844 confirmou zero console/pageerror/requestfailed, overflow zero, imagens carregadas e h1 único.
+- **Decisão:** preservar preview histórico `https://preview.barbara-carmo-arquitetura-4ga.pages.dev/`; não apagar ou migrar automaticamente.
+- **Status:** concluído como preview.
+
+## TEST-017 — QA externo pós-deploy
+
+- **Etapa:** revisão pré-entrega.
+- **Evidência:** `node /tmp/live_qa.js` contra o alias `redesign-20260817`.
+- **Resultado desktop:** 1440px, scrollWidth 1440, title correto, `pt-BR`, `noindex,nofollow`, 6 imagens naturais, 0/0/0 erros.
+- **Resultado mobile:** 390px, scrollWidth 390, title correto, `pt-BR`, `noindex,nofollow`, 6 imagens naturais, 0/0/0 erros.
+- **Status:** aprovado para validação humana do preview; não é aprovação comercial.
+
+## PEND-014 — Validação humana e conteúdo real
+
+- **Bloqueios:** identidade oficial, assets/licenças, obras publicáveis, registro CAU/responsável técnica, serviços e processo reais, CTA/canal, privacidade, preço, domínio oficial e autorização da profissional.
+- **Impacto:** impede site comercial aprovado, SEO/indexação, contato, produção e alegação de conversão.
+- **Próximo passo:** titular validar a direção e autorizar ou rejeitar o caminho; somente então substituir conteúdo exploratório e repetir compliance/QA.
+- **Status:** aberto.
+
+## Fechamento desta execução
+
+- **Status operacional:** redesign concluído — projeto gerado — aguardando validação humana.
+- **Implementação local:** concluída e exercitada.
+- **Preview Cloudflare:** publicado na conta canônica e verificado externamente.
+- **Pesquisa:** exatamente dez referências registradas.
+- **Assets:** três imagens geradas e avaliadas, sem uso de obras reais.
+- **Notion:** atualização e releitura pendentes nesta etapa de documentação.
+- **Produção/contato:** não realizados.
+

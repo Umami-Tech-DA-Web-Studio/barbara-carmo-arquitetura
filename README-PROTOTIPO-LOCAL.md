@@ -10,7 +10,7 @@ Status: exercício interno, sem vínculo comercial, sem publicação e sem conta
 
 ## Direção candidata
 
-Editorial mineral: fundo quente, verde-escuro como base, terracota como acento, tipografia serifada para narrativa e sans/monoespaçada para interface. A composição usa assimetria controlada, espaços de respiro e placeholders visuais em CSS para não baixar ou reutilizar imagens proprietárias.
+Editorial mineral: fundo quente, verde-escuro como base, terracota como acento, tipografia serifada para narrativa e sans/monoespaçada para interface. A composição usa assimetria controlada, espaços de respiro e imagens geradas localmente, sempre identificadas como material exploratório não representativo de obra real.
 
 Isto não é o design system canônico da Umami Tech. Tokens e componentes são específicos deste exercício e devem ser reavaliados antes de qualquer reutilização.
 
@@ -18,8 +18,8 @@ Isto não é o design system canônico da Umami Tech. Tokens e componentes são 
 
 - Textos, nomes de projetos, cenas, descrições e formulário são fictícios e identificados na interface.
 - Não foram usados clientes, obras, CAU, depoimentos, métricas, prêmios, resultados ou dados de contato reais.
+- As imagens locais em `assets/generated/` foram geradas com ComfyUI e avaliadas visualmente antes da inserção; cada uso contém aviso de não representação de obra real.
 - Não há imagens externas, fontes externas, analytics, cookies, envio de formulário, armazenamento remoto ou integração.
-- O visual principal usa composições CSS abstratas, tratadas como placeholders de exercício.
 - `opendesign/mockups/barbara-carmo-prospeccao/favicon.svg` é um ícone SVG local criado para eliminar a requisição 404 de favicon observada no primeiro QA; não é marca aprovada para uso comercial.
 
 ## Limitações conhecidas

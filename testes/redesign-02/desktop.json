@@ -1,0 +1,85 @@
+{
+  "name": "desktop",
+  "width": 1440,
+  "height": 900,
+  "initial": {
+    "title": "Barbara Carmo Arquitetura — preview exploratório",
+    "lang": "pt-BR",
+    "robots": "noindex, nofollow",
+    "h1": 1,
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "images": [
+      {
+        "src": "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-hero_00001_.png",
+        "naturalWidth": 768,
+        "naturalHeight": 512,
+        "alt": "Casa contemporânea de volumes escuros, jardim e caminho de concreto; imagem gerada para direção visual exploratória.",
+        "objectFit": "cover"
+      },
+      {
+        "src": "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-courtyard_00001_.png",
+        "naturalWidth": 512,
+        "naturalHeight": 512,
+        "alt": "Pátio coberto de uma casa contemporânea com jardim e luz de fim de tarde.",
+        "objectFit": "cover"
+      },
+      {
+        "src": "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-interior_00001_.png",
+        "naturalWidth": 512,
+        "naturalHeight": 512,
+        "alt": "Interior silencioso com janela, cortinas neutras e bancos de fibra natural.",
+        "objectFit": "cover"
+      },
+      {
+        "src": "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-hero_00001_.png",
+        "naturalWidth": 768,
+        "naturalHeight": 512,
+        "alt": "Fachada contemporânea com volumes geométricos e paisagismo; recorte de imagem gerada.",
+        "objectFit": "cover"
+      },
+      {
+        "src": "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-interior_00001_.png",
+        "naturalWidth": 512,
+        "naturalHeight": 512,
+        "alt": "Detalhe de interior com materiais naturais e luz suave; imagem gerada para direção visual exploratória.",
+        "objectFit": "cover"
+      },
+      {
+        "src": "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-hero_00001_.png",
+        "naturalWidth": 768,
+        "naturalHeight": 512,
+        "alt": "Imagem gerada de uma casa contemporânea para o estudo exploratório.",
+        "objectFit": "cover"
+      }
+    ],
+    "css": [
+      "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/styles.css?v=redesign-02"
+    ],
+    "js": [
+      "http://127.0.0.1:8292/opendesign/mockups/barbara-carmo-prospeccao/app.js?v=redesign-02"
+    ],
+    "reduced": "1e-05s"
+  },
+  "empty": true,
+  "dialogOpen": true,
+  "dialogImage": {
+    "naturalWidth": 512,
+    "alt": "Pátio contemporâneo com jardim e luz filtrada."
+  },
+  "menuOpen": null,
+  "invalidStatus": "Revise os campos destacados antes de validar.",
+  "successStatus": "Demonstração concluída — nenhum dado foi enviado ou armazenado.",
+  "requestDelta": 0,
+  "consoleErrors": [],
+  "pageErrors": [],
+  "dom": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "activeTag": "BUTTON",
+    "activeId": "",
+    "focusVisible": true,
+    "bodyBg": "rgb(241, 237, 227)",
+    "heroBg": "rgb(28, 43, 39)"
+  }
+}
