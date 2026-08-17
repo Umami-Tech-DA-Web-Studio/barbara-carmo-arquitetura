@@ -979,7 +979,7 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 
 - **Etapa:** execução controlada / entrega de preview.
 - **Data/hora:** 17/08/2026, BRT.
-- **Pré-requisito:** `npx --yes wrangler@latest whoami` confirmou `umamitech1@gmail.com`, Account ID `24da8c756c6d6b7702b238034329966a`, Wrangler `4.123.0`, `pages:write`.
+- **Pré-requisito:** `wrangler whoami` confirmou a conta canônica, Account ID `24da8c756c6d6b7702b238034329966a`, Wrangler `4.123.0`, `pages:write`.
 - **Deploy:** projeto Pages `barbara-carmo-arquitetura`, branch `redesign-20260817`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`; deployment `https://0bf5f156.barbara-carmo-arquitetura-4ga.pages.dev`.
 - **Proteções:** `noindex,nofollow`, `robots.txt` com `Disallow: /`, nenhum domínio oficial, nenhuma publicação de produção, nenhuma mensagem.
 - **Verificação externa:** home, robots, CSS e PNG responderam HTTP 200; Playwright externo em 1440×900 e 390×844 confirmou zero console/pageerror/requestfailed, overflow zero, imagens carregadas e h1 único.
@@ -1007,6 +1007,67 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Implementação local:** concluída e exercitada.
 - **Preview Cloudflare:** publicado na conta canônica e verificado externamente.
 - **Pesquisa:** exatamente dez referências registradas.
+
+---
+
+# 16. Geração externa controlada e revalidação local — 17/08/2026
+
+## REG-021 — Geração controlada com Cloudflare Workers AI
+
+- **Etapa universal:** execução controlada / revisão pré-entrega.
+- **Data/hora:** 17/08/2026, 00:10–00:14 BRT.
+- **Responsável:** Hermes.
+- **Objetivo:** testar um provedor remoto já disponível, sem executar o ComfyUI local e sem contratar novo serviço.
+- **Insumos:** conta Cloudflare canônica confirmada por `wrangler whoami`; Wrangler 4.92.0 instalado no repositório auxiliar; modelo oficial `@cf/bytedance/stable-diffusion-xl-lightning`.
+- **Proteção de custo:** Worker temporário em `/tmp/umami-cf-ai-test`, execução com `wrangler dev --remote`, sem `wrangler deploy`; modelo documentado como `$0.00 per step`; nenhuma cobrança, upgrade ou cartão ativado. A regra de operação continua limitada à franquia gratuita.
+- **O que foi feito:** três prompts específicos para hero, pátio e interior; seeds `20260817`, `20260818` e `20260819`; duas rodadas corrigidas após erro de transporte JSON no script de lote.
+- **Resultado observado:** três respostas HTTP 200; `barbara-cloudflare-hero.jpg` 768×512, `barbara-cloudflare-courtyard.jpg` 768×768 e `barbara-cloudflare-interior.jpg` 768×768; arquivos JPEG legíveis.
+- **Problema:** primeira tentativa do lote retornou HTTP 500 porque o script passou o caminho do JSON como corpo literal; o modelo não foi chamado nessa tentativa.
+- **Causa provável:** ausência do prefixo `@` no argumento `curl --data-binary`.
+- **Correção:** script de lote corrigido para usar `--data-binary @arquivo.json`.
+- **Reteste:** segunda execução dos dois itens retornou HTTP 200; os três arquivos foram avaliados pelo `evaluate_generated_asset.py` com `technical_verdict: pass`.
+- **Avaliação visual/semântica:** hero `revisar` por luz dura/estourada; pátio `passar para exploração` com revisão de detalhe de porta/ferragem; interior `passar para exploração`, ainda genérico e com objetos estilizados.
+- **Decisão:** copiar os três candidatos para `assets/generated/` e para a raiz publicada local, mas não substituir os assets atuais nem alterar o HTML nesta rodada.
+- **Evidências:** `referencias/assets-gerados.md`; arquivos JPEG; saída técnica dos três assets; hashes SHA-256 registrados no terminal da execução.
+- **Critério de aprovação:** geração externa, integridade técnica e avaliação visual separadas; somente os candidatos classificados como exploração podem seguir para revisão humana, sem aprovação comercial.
+- **Status:** concluído como benchmark controlado; uso no preview pendente.
+
+## TEST-018 — QA local fresco após correção da raiz publicada dos assets
+
+- **Etapa:** revisão pré-entrega.
+- **Data/hora:** 17/08/2026, 00:08–00:09 BRT.
+- **Ferramenta:** servidor `python3 -m http.server 8330 --directory opendesign/mockups/barbara-carmo-prospeccao` e Playwright Chromium.
+- **Falha inicial:** as seis imagens retornaram `naturalWidth=0` porque o HTML era servido pela pasta do mockup e os assets estavam somente na raiz irmã do projeto.
+- **Correção:** criada `opendesign/mockups/barbara-carmo-prospeccao/assets/generated/` e copiados os três assets PNG usados pelo HTML.
+- **Reteste:** `node /tmp/verify_barbara_redesign.cjs` terminou com código 0 nos viewports `1440×900` e `390×844`.
+- **Resultado:** `lang=pt-BR`, `main`, `h1`, `noindex,nofollow`, sem overflow, reduced motion emulado, 6 imagens com dimensões naturais e `alt`, filtro/estado vazio, reset, modal e menu mobile exercitados; 0 console errors, 0 pageerrors e 0 requestfailed.
+- **Evidência:** saída JSON do script e screenshots temporários em `/tmp/barbara-desktop-redesign.png` e `/tmp/barbara-mobile-redesign.png`.
+- **Status:** aprovado localmente para o artefato atual; QA externo após qualquer nova publicação permanece separado.
+
+## DEC-009 — Usar provedores já disponíveis sem ampliar custo
+
+- **Data/hora:** 17/08/2026, BRT.
+- **Decisão:** nesta rodada, usar somente Cloudflare Workers AI já autenticado e dentro da regra de free tier; não usar Replicate, fal.ai, WaveSpeed ou qualquer API paga nova.
+- **ChatGPT:** navegação automatizada recebeu desafio de segurança Cloudflare; não houve tentativa de contorno, captura de sessão ou digitação de credencial.
+- **Gemini:** abriu em estado não autenticado, exibindo `Fazer login`; não houve login nem envio de prompt.
+- **ComfyUI:** não usado nesta rodada devido aos travamentos relatados no macOS.
+- **Alternativa:** manter ChatGPT/Gemini como provedores disponíveis somente quando a sessão autenticada puder ser verificada de forma segura; manter Cloudflare como teste remoto atual.
+- **Status:** aprovada para esta execução; acesso autenticado aos dois provedores continua pendente.
+
+## PEND-015 — QA externo da raiz atualizada e decisão de aplicação dos candidatos
+
+- **Tipo:** preview / publicação / decisão visual.
+- **Impacto:** os candidatos Cloudflare existem e passaram no gate técnico, mas ainda não estão aplicados no HTML nem foram verificados no host externo atual.
+- **Próxima ação:** com autorização explícita de publicação, atualizar o preview canônico ou um alias de preview, repetir QA externo e decidir se algum candidato substitui o asset correspondente.
+- **Bloqueios adicionais:** ChatGPT bloqueado por desafio de segurança nesta sessão; Gemini sem sessão autenticada; aprovação humana da direção e dos assets continua necessária.
+- **Status:** aberto.
+
+## Fechamento atualizado
+
+- **Status operacional:** redesign local verificável; candidatos Cloudflare gerados e documentados; projeto continua `aguardando validação humana`.
+- **Geração:** Cloudflare Workers AI executado remotamente sem ComfyUI; nenhuma nova cobrança ativada.
+- **QA local:** passou após correção da raiz publicada dos assets.
+- **Preview externo:** não reclassificado nesta seção; deployment/publicação exige evidência fresca específica do artefato atual e autorização explícita.
 - **Assets:** três imagens geradas e avaliadas, sem uso de obras reais.
 - **Notion:** atualização e releitura pendentes nesta etapa de documentação.
 - **Produção/contato:** não realizados.
