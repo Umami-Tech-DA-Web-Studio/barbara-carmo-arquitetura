@@ -1082,3 +1082,15 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Evidência:** snapshot externo atual com título `Barbara Carmo Arquitetura — exercício de prospecção`, placeholder visível e quatro cards.
 - **Status:** verificação concluída; publicação do redesign permanece bloqueada por autorização explícita e PEND-015.
 
+## DEC-009 — MotionSites AI como benchmark premium condicionado
+
+- **Etapa:** definição e congelamento / referências visuais.
+- **Data/hora:** 17/08/2026, 00:27 BRT.
+- **Fonte:** `https://motionsites.ai/`; auditoria pública do catálogo, filtros, previews e itens com `Copy prompt`/`Unlock prompt`.
+- **Decisão:** usar MotionSites como benchmark de composição, hierarquia, navegação, motion e CTA; não usar automaticamente screenshots, vídeos, prompts completos, código, imagens ou identidade como ativos licenciados.
+- **Seleção inicial Barbara:** Sky Estate, Luxury Hero, Stillmind, Custom Spaces, Urban Jungle, 3D Portfolio, Immersive Studio, Visual Hero, Bespoke/Slate e Equilibrium.
+- **Adaptação:** traduzir padrões observados para a direção editorial mineral da Barbara, com identidade, copy, assets e tokens próprios; substituir qualquer conteúdo fictício por conteúdo autorizado ou marcação explícita de exercício.
+- **Risco:** a página pública informa `All rights reserved`; as rotas públicas de terms/license testadas retornaram 404. Licença comercial de prompts, assets, screenshots, vídeos e código permanece não verificada.
+- **Critério de aprovação:** referência só pode influenciar o projeto após ficha `REF-ID`, data, URL, padrão generalizável, adaptação original, risco, QA mobile/acessibilidade/performance e aprovação humana.
+- **Status:** benchmark aceito com restrições; nenhuma alteração automática no mockup e nenhuma publicação realizada.
+
