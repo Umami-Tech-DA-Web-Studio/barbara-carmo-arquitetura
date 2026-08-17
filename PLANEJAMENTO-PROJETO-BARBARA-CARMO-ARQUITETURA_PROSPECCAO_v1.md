@@ -1072,3 +1072,13 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Notion:** atualização e releitura pendentes nesta etapa de documentação.
 - **Produção/contato:** não realizados.
 
+## TEST-019 — Verificação externa do preview canônico sem mutação
+
+- **Etapa:** revisão pré-entrega / verificação externa.
+- **Data/hora:** 17/08/2026, 00:17 BRT.
+- **Alvo:** `https://preview.barbara-carmo-arquitetura-4ga.pages.dev/`.
+- **Resultado observado:** HTTP/browser carregou a página, mas o conteúdo é a versão anterior: hero com `Placeholder visual abstrato`, cards marcados `IMAGEM FICTÍCIA`, quatro cards de projetos e cópia anterior.
+- **Decisão:** não tratar o preview canônico como representação do redesign local atual; não fazer deploy ou push nesta etapa.
+- **Evidência:** snapshot externo atual com título `Barbara Carmo Arquitetura — exercício de prospecção`, placeholder visível e quatro cards.
+- **Status:** verificação concluída; publicação do redesign permanece bloqueada por autorização explícita e PEND-015.
+
