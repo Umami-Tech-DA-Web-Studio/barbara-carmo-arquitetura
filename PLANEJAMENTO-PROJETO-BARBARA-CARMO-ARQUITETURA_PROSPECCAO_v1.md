@@ -1227,3 +1227,31 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Critério de fechamento:** medir peso antes/depois, validar qualidade visual, `naturalWidth`, formatos, cache, mobile e reauditoria.
 - **Status:** não bloqueante para preview técnico; pendente para performance avançada.
 
+## DEC-012 — Protótipo premium quase pronto para apresentação
+
+- **Data:** 18/08/2026.
+- **Decisão:** apresentar Barbara como proposta digital quase pronta, específica para arquitetura residencial e interiores em Campo Grande/MS, e não como MVP genérico.
+- **Aplicado:** linguagem de proposta digital, navegação de crescimento, seção de portfólio vivo/briefing qualificado/conteúdo e descoberta, disclaimers discretos e preservação da direção editorial mineral.
+- **Limites:** identidade oficial, portfólio real, imagens autorizadas, conteúdo final, CAU, provas e contratação continuam pendentes.
+- **Status:** aprovada para preview de apresentação.
+
+## REG-026 — Atualização conceitual Barbara
+
+- **Etapa:** execução controlada / redesign de apresentação.
+- **Resultado:** hero, navegação, seção de crescimento, processo e footer agora comunicam uma solução que pode evoluir com o trabalho, sem prometer resultado comercial.
+- **QA local:** `npm run qa:preview` e `npm run qa:parity` passaram após a atualização.
+- **QA visual:** desktop/mobile revisados; hierarquia, densidade e seção de crescimento aprovadas para apresentação.
+- **Status:** concluído para preview técnico.
+
+## TEST-025 — Deploy final da atualização de conceito
+
+- **Deployment:** `https://d01b1513.barbara-carmo-arquitetura-4ga.pages.dev`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`.
+- **Verificação externa:** HTTP 200; HTML contém `PROPOSTA DIGITAL`, título de proposta e seção de crescimento; `npm run qa:preview` externo passou em desktop/mobile.
+- **Critério:** preview publicado, noindex preservado, sem erro de console/pageerror/rede e sem contato externo.
+- **Status:** aprovado.
+
+## PEND-019 — Evolução pós-validação Barbara
+
+- **Próxima etapa:** substituir imagens exploratórias por acervo autorizado, confirmar identidade, conteúdo e portfólio, aprofundar SEO local, conteúdo e captação após contrato.
+- **Status:** não bloqueante para apresentação; bloqueante para produção oficial.
+
