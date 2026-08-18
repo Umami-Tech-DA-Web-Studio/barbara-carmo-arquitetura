@@ -1094,3 +1094,42 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Critério de aprovação:** referência só pode influenciar o projeto após ficha `REF-ID`, data, URL, padrão generalizável, adaptação original, risco, QA mobile/acessibilidade/performance e aprovação humana.
 - **Status:** benchmark aceito com restrições; nenhuma alteração automática no mockup e nenhuma publicação realizada.
 
+## DEC-010 — Autorização de push e deploy de preview técnico
+
+- **Etapa:** definição e congelamento / infraestrutura de preview.
+- **Data/hora:** 17/08/2026, 21:20 BRT.
+- **Decisão do titular:** push para GitHub e deploy em URL temporária da Cloudflare estão autorizados como parte da entrega técnica avaliada. A publicação oficial com domínio definitivo permanece dependente de contrato aceito e orquestração humana posterior.
+- **Escopo autorizado:** commits, push da branch do projeto, deploy Cloudflare Pages em branch/URL temporária, QA externo, correções e novos deploys necessários até o preview estar consistente.
+- **Fora do escopo:** domínio oficial, DNS oficial, conteúdo comercial final, contato com prospecto, cobrança, publicação oficial e aceitação de risco regulatório.
+- **Status:** aprovada.
+
+## REG-022 — Push GitHub e deploy do redesign
+
+- **Etapa:** execução controlada / entrega de preview.
+- **Data/hora:** 17/08/2026, 21:20 BRT.
+- **Pré-requisitos:** conta GitHub autenticada; remote `https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura.git`; conta Cloudflare canônica `24da8c756c6d6b7702b238034329966a` confirmada por `wrangler whoami`.
+- **Correção aplicada antes da promoção:** `lang="pt-BR"` validado no artefato; `preview-dist` sincronizado com o mockup e com todos os assets da raiz efetivamente publicada; README corrigido para registrar ComfyUI e Cloudflare Workers AI como origens documentadas.
+- **Commit publicado:** `6ec6489ff46a95f83ac748b4a71d8c402fceed20` na branch `main`.
+- **Push:** `main -> origin/main` concluído; `git ls-remote` retornou `6ec6489ff46a95f83ac748b4a71d8c402fceed20`.
+- **Deploy:** Cloudflare Pages `barbara-carmo-arquitetura`, branch `redesign-20260817`, source `6ec6489`; deployment `https://4d730cec.barbara-carmo-arquitetura-4ga.pages.dev`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`.
+- **Proteções:** `noindex,nofollow`, `robots.txt` com `Disallow: /`, sem domínio oficial e sem contato comercial.
+- **Status:** execução concluída; aguarda evidência externa registrada em TEST-020.
+
+## TEST-020 — QA externo do alias temporário
+
+- **Etapa:** revisão pré-entrega / QA externo.
+- **Data/hora:** 17/08/2026, 21:20 BRT.
+- **Alvo:** `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/`.
+- **Playwright Chromium:** desktop `1440×900` e mobile `390×844`; resultado `status: pass`.
+- **Evidência:** `lang=pt-BR`, `main`, `h1`, `robots=noindex, nofollow`, overflow falso, seis imagens com `naturalWidth`/`naturalHeight` válidos, reduced motion ativo, zero console errors, zero pageerrors e zero failed requests; filtro/estado vazio, modal, fechamento e menu mobile exercitados.
+- **HTTP externo:** User-Agent de navegador retornou HTTP 200 para `/`, `/robots.txt`, `/styles.css`, `/app.js` e PNG principal. User-Agent Python sem identificação recebeu HTTP 403 da proteção de borda; isso foi classificado como diferença anti-bot, não como falha do artefato, pois o navegador e o probe com UA de navegador carregaram o conteúdo.
+- **Critério de aprovação:** preview temporário acessível no navegador, artefato atual servido, noindex preservado e QA externo sem regressões.
+- **Status:** aprovado para preview técnico.
+
+## PEND-016 — Publicação oficial após contrato
+
+- **Responsável:** titular/humano.
+- **Fora da etapa atual:** domínio oficial, DNS, conteúdo e identidade finais, dados reais, revisão profissional, publicação oficial e pós-lançamento.
+- **Próxima ação:** após aceite contratual, definir escopo avançado, conteúdo aprovado, domínio oficial e critérios de produção.
+- **Status:** pendente não bloqueante para o preview técnico; bloqueante para produção oficial.
+
