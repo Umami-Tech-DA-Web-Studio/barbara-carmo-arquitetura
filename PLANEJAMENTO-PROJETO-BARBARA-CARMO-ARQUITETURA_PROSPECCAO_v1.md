@@ -1170,3 +1170,34 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Próxima ação:** repetir `umami-qa review --agents codex,gemini` depois que os dois CLIs estiverem aptos.
 - **Status:** bloqueante somente para o gate multiagente; não invalida o QA determinístico já executado.
 
+## DEC-011 — Antigravity como agente visual operacional
+
+- **Etapa:** melhoria do método / substituição do Gemini CLI.
+- **Data/hora:** 18/08/2026.
+- **Decisão:** usar Antigravity CLI (`agy`) como agente visual/UX operacional do `umami-qa`; Gemini CLI permanece fallback opcional até que o cliente antigo seja suportado novamente ou a autenticação alternativa seja definida.
+- **Base:** Antigravity CLI oficial `v1.1.13`, modo `--print`, `--output-format json`, `--mode plan` e teste de autenticação `AGY_AUTH_OK` aprovado.
+- **Segurança:** runner usa `--mode plan` + `--sandbox`; `--dangerously-skip-permissions` é usado apenas para evitar prompt interativo do `read_file` no headless, com workdir restrito e sem autorização de escrita no prompt. Reavaliar antes de uso em projetos com dados sensíveis.
+- **Status:** aprovada para piloto técnico.
+
+## REG-024 — Antigravity instalado, integrado e usado na reauditoria
+
+- **Etapa:** execução controlada / auditoria multiagente.
+- **Data/hora:** 18/08/2026.
+- **Instalação:** instalador oficial `https://antigravity.google/cli/install.sh`; payload `darwin_arm64`; SHA-512 verificado pelo instalador; binário `/Users/raphael/.local/bin/agy`; versão `1.1.13`.
+- **Integração:** adaptador `antigravity`/`agy` adicionado ao `umami_qa.py`; envelope JSON do CLI é normalizado para o contrato de findings.
+- **Primeira auditoria:** `AGY-001` menu mobile sem Escape/clique externo; `AGY-002` microtipografia em `--clay` abaixo do contraste preferível.
+- **Correções implementadas:** fechamento por Escape/clique externo com retorno de foco; `--clay-dark` aplicado aos micro-rótulos indicados.
+- **Status:** execução concluída; findings tratados.
+
+## TEST-023 — Reauditoria final pós-correção e pós-deploy
+
+- **Etapa:** revisão pré-entrega / fechamento de rodada.
+- **Run:** `audits/20260818-barbara-qa-002`.
+- **Deployment:** `https://b30c42de.barbara-carmo-arquitetura-4ga.pages.dev`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`.
+- **Antigravity:** `pass`, findings consolidados `0`.
+- **Browser capture:** `pass` em desktop `1440×900` e mobile `390×844`.
+- **QA externo:** Playwright passou; menu Escape/clique externo/retorno de foco passou; HTTP/DOM/assets passaram; zero console errors, pageerrors e failed requests.
+- **Contraste:** seletores pequenos passaram a usar `rgb(135,67,49)`; contraste calculado contra `#f1ede3`: `6.243:1`.
+- **Decisão:** correções aprovadas para preview técnico; produção oficial continua fora do escopo.
+- **Status:** aprovado.
+

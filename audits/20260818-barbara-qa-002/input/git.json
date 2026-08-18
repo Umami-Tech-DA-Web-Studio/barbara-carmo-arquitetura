@@ -1,0 +1,72 @@
+{
+  "status": {
+    "command": [
+      "git",
+      "status",
+      "--short",
+      "--branch"
+    ],
+    "returncode": 0,
+    "stdout": "## main...origin/main\n",
+    "stderr": "",
+    "duration_seconds": 0.06
+  },
+  "head": {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "053146378046ca8cc538e2dcc62a0fb024cf3251\n",
+    "stderr": "",
+    "duration_seconds": 0.021
+  },
+  "branch": {
+    "command": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "returncode": 0,
+    "stdout": "main\n",
+    "stderr": "",
+    "duration_seconds": 0.022
+  },
+  "remote": {
+    "command": [
+      "git",
+      "remote",
+      "get-url",
+      "origin"
+    ],
+    "returncode": 0,
+    "stdout": "https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura.git\n",
+    "stderr": "",
+    "duration_seconds": 0.024
+  },
+  "log": {
+    "command": [
+      "git",
+      "log",
+      "-5",
+      "--oneline",
+      "--decorate"
+    ],
+    "returncode": 0,
+    "stdout": "0531463 (HEAD -> main, origin/main) Apply Antigravity QA fixes\nc772cd1 Add multi-agent audit runner evidence\n791564d Record final preview redeploy smoke test\n7279db1 Ignore local Wrangler cache\n6cda811 Record authorized preview deployment and QA\n",
+    "stderr": "",
+    "duration_seconds": 0.03
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "duration_seconds": 0.023
+  }
+}

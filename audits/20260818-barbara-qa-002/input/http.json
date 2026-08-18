@@ -1,0 +1,34 @@
+{
+  "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/",
+  "observed_at": "2026-08-17T23:46:27.351345-03:00",
+  "requests": [
+    {
+      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "sample_bytes": 512
+    },
+    {
+      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/robots.txt",
+      "status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "sample_bytes": 26
+    },
+    {
+      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/styles.css",
+      "status": 200,
+      "content_type": "text/css; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "sample_bytes": 512
+    },
+    {
+      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/app.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "sample_bytes": 512
+    }
+  ]
+}
