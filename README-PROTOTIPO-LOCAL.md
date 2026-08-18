@@ -1,6 +1,6 @@
 # Protótipo local de prospecção — Barbara Carmo Arquitetura
 
-Status: exercício interno, sem vínculo comercial, sem publicação e sem contato com o prospecto.
+Status: proposta digital quase pronta para validação humana, sem contrato, sem conteúdo final e sem publicação oficial.
 
 ## Acesso
 
