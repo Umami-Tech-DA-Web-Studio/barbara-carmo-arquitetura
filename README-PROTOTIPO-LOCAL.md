@@ -18,7 +18,7 @@ Isto não é o design system canônico da Umami Tech. Tokens e componentes são 
 
 - Textos, nomes de projetos, cenas, descrições e formulário são fictícios e identificados na interface.
 - Não foram usados clientes, obras, CAU, depoimentos, métricas, prêmios, resultados ou dados de contato reais.
-- As imagens locais em `assets/generated/` foram geradas com ComfyUI e avaliadas visualmente antes da inserção; cada uso contém aviso de não representação de obra real.
+- As imagens em `assets/generated/` foram geradas por provedores documentados (incluindo ComfyUI e Cloudflare Workers AI), avaliadas tecnicamente e visualmente antes da inserção; cada uso contém aviso de não representação de obra real.
 - Não há imagens externas, fontes externas, analytics, cookies, envio de formulário, armazenamento remoto ou integração.
 - `opendesign/mockups/barbara-carmo-prospeccao/favicon.svg` é um ícone SVG local criado para eliminar a requisição 404 de favicon observada no primeiro QA; não é marca aprovada para uso comercial.
 
