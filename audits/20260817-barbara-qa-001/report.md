@@ -8,6 +8,7 @@
 
 - `gemini`: **blocked** — exit `41`
 - `codex`: **blocked** — exit `1`
+- `antigravity`: **pass_with_findings** — exit `0`
 
 ## Evidência determinística
 
@@ -16,4 +17,18 @@
 
 ## Findings consolidados
 
-Nenhum finding consolidado. Isso não equivale a aprovação: confira o estado dos agentes e o QA determinístico.
+### AGY-001 — Ausência de fechamento do menu mobile por clique externo ou tecla Escape
+- Severidade: `low`
+- Categoria: `ux`
+- Agentes: `antigravity`
+- Evidência: `[{"type": "dom", "path": "preview-dist/app.js", "locator": ".site-nav.is-open", "quote_or_observation": "O menu mobile abre via data-menu-toggle e fecha ao selecionar uma âncora, mas não possui listeners para clique fora da área do menu ou pressionamento da tecla Escape."}]`
+- Recomendações: Adicionar listeners no document para fechar a navegação móvel ao detectar clique fora de `.site-nav`/`[data-menu-toggle]` ou ao pressionar a tecla Escape.
+- Aprovação humana: `False`
+
+### AGY-002 — Contraste da cor de acento --clay em microtipografia monoespaçada sobre fundo claro
+- Severidade: `note`
+- Categoria: `accessibility`
+- Agentes: `antigravity`
+- Evidência: `[{"type": "dom", "path": "preview-dist/styles.css", "locator": ".filter-button span, .service-number, .process-list li > span", "quote_or_observation": "A variável --clay (#b45e43) sobre fundo --paper (#f1ede3) atinge razão de contraste de aproximadamente 3.54:1 em fontes mono de 10px-11px."}]`
+- Recomendações: Utilizar a variável já existente --clay-dark (#874331, contraste 5.9:1) para pequenos rótulos monoespaciados e numerações menores que 12px.
+- Aprovação humana: `False`

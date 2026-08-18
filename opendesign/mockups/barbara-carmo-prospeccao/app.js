@@ -4,16 +4,28 @@
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const siteNav = document.querySelector('#site-nav');
   if (menuToggle && siteNav) {
+    const closeMenu = ({ restoreFocus = false } = {}) => {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      siteNav.classList.remove('is-open');
+      if (restoreFocus) menuToggle.focus();
+    };
     menuToggle.addEventListener('click', () => {
       const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
       menuToggle.setAttribute('aria-expanded', String(!isOpen));
       siteNav.classList.toggle('is-open', !isOpen);
     });
     siteNav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        menuToggle.setAttribute('aria-expanded', 'false');
-        siteNav.classList.remove('is-open');
-      });
+      link.addEventListener('click', () => closeMenu());
+    });
+    document.addEventListener('click', (event) => {
+      if (menuToggle.getAttribute('aria-expanded') !== 'true') return;
+      if (!(event.target instanceof Node)) return;
+      if (!siteNav.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        closeMenu({ restoreFocus: true });
+      }
     });
   }
 
