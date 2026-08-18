@@ -1245,7 +1245,7 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 
 ## TEST-025 — Deploy final da atualização de conceito
 
-- **Deployment:** `https://d01b1513.barbara-carmo-arquitetura-4ga.pages.dev`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`.
+- **Deployment:** `https://fe14f3dc.barbara-carmo-arquitetura-4ga.pages.dev`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`.
 - **Verificação externa:** HTTP 200; HTML contém `PROPOSTA DIGITAL`, título de proposta e seção de crescimento; `npm run qa:preview` externo passou em desktop/mobile.
 - **Critério:** preview publicado, noindex preservado, sem erro de console/pageerror/rede e sem contato externo.
 - **Status:** aprovado.
