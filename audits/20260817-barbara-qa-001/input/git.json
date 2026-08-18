@@ -1,0 +1,72 @@
+{
+  "status": {
+    "command": [
+      "git",
+      "status",
+      "--short",
+      "--branch"
+    ],
+    "returncode": 0,
+    "stdout": "## main...origin/main\n",
+    "stderr": "",
+    "duration_seconds": 0.028
+  },
+  "head": {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "791564d17aca31d4948ef7728e969fb13583d631\n",
+    "stderr": "",
+    "duration_seconds": 0.013
+  },
+  "branch": {
+    "command": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "returncode": 0,
+    "stdout": "main\n",
+    "stderr": "",
+    "duration_seconds": 0.015
+  },
+  "remote": {
+    "command": [
+      "git",
+      "remote",
+      "get-url",
+      "origin"
+    ],
+    "returncode": 0,
+    "stdout": "https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura.git\n",
+    "stderr": "",
+    "duration_seconds": 0.015
+  },
+  "log": {
+    "command": [
+      "git",
+      "log",
+      "-5",
+      "--oneline",
+      "--decorate"
+    ],
+    "returncode": 0,
+    "stdout": "791564d (HEAD -> main, origin/main) Record final preview redeploy smoke test\n7279db1 Ignore local Wrangler cache\n6cda811 Record authorized preview deployment and QA\n6ec6489 Sync preview artifact and generation documentation\nbe30390 Add MotionSites premium reference governance\n",
+    "stderr": "",
+    "duration_seconds": 0.017
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "duration_seconds": 0.011
+  }
+}

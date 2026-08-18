@@ -1,0 +1,10 @@
+
+--- STDERR ---
+{
+  "session_id": "5361963c-3adf-43fb-a255-5900d58aa329",
+  "error": {
+    "type": "Error",
+    "message": "Please set an Auth method in your /Users/raphael/.gemini/settings.json or specify one of the following environment variables before running: GEMINI_API_KEY, GOOGLE_GENAI_USE_VERTEXAI, GOOGLE_GENAI_USE_GCA",
+    "code": 41
+  }
+}

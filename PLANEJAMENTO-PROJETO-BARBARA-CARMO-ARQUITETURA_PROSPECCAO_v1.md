@@ -1143,3 +1143,30 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Decisão:** preview técnico considerado publicado e atualizado no GitHub/Cloudflare; produção oficial permanece fora do escopo atual.
 - **Status:** aprovado.
 
+## REG-023 — Implementação do orquestrador de auditoria multiagente
+
+- **Etapa:** execução controlada / qualidade e melhoria do método.
+- **Data/hora:** 17/08/2026.
+- **Ferramenta:** `/Users/raphael/Documents/Umami Tech/Método de Sites/ferramentas/umami-qa/umami_qa.py`.
+- **Implementado:** subcomandos `collect`, `capture`, `review`, `reconcile` e `report`; coleta Git/HTTP/inventário; captura Playwright desktop/mobile; preservação de respostas brutas; normalização JSON; deduplicação; relatório com estado de agentes e evidência determinística.
+- **Teste do runner:** quatro testes pytest passaram; `py_compile` passou.
+- **Auditoria executada:** run `audits/20260817-barbara-qa-001`, com 16 arquivos e 3.840.306 bytes de evidência, sem padrões de tokens/chaves/Bearer detectados.
+- **Resultado determinístico:** browser capture pass em dois viewports; HTTP probe `[200, 200, 200, 200]`.
+- **Resultado dos agentes:** Codex bloqueado por limite de uso; Gemini bloqueado por ausência de método de autenticação CLI. Nenhum finding foi inventado.
+- **Status:** implementação do MVP aprovada; piloto multiagente incompleto por dependências externas.
+
+## TEST-022 — Teste do orquestrador e relatório honesto
+
+- **Etapa:** revisão pré-entrega do fluxo de auditoria.
+- **Evidência:** `audits/20260817-barbara-qa-001/report.md`.
+- **Resultado:** `4 passed`; captura desktop/mobile `pass`; estado dos agentes preservado como `blocked`; findings consolidados `0` sem converter bloqueio em aprovação.
+- **Critério:** o relatório distingue determinístico aprovado de auditoria por agentes não executada.
+- **Status:** aprovado.
+
+## PEND-017 — Autenticação/uso dos agentes externos
+
+- **Codex:** aguardar renovação da janela de uso ou decisão de créditos/plano; não repetir automaticamente durante o bloqueio.
+- **Gemini:** configurar autenticação pelo fluxo oficial do CLI ou variável segura fora do repositório; não inserir chave no chat.
+- **Próxima ação:** repetir `umami-qa review --agents codex,gemini` depois que os dois CLIs estiverem aptos.
+- **Status:** bloqueante somente para o gate multiagente; não invalida o QA determinístico já executado.
+
