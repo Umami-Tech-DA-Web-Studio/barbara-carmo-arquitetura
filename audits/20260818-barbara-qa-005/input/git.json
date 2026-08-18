@@ -1,0 +1,72 @@
+{
+  "status": {
+    "command": [
+      "git",
+      "status",
+      "--short",
+      "--branch"
+    ],
+    "returncode": 0,
+    "stdout": "## main...origin/main\n",
+    "stderr": "",
+    "duration_seconds": 0.029
+  },
+  "head": {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "d53d85d3e22759fc93bf8d34b4b3b7b8f1558483\n",
+    "stderr": "",
+    "duration_seconds": 0.019
+  },
+  "branch": {
+    "command": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "returncode": 0,
+    "stdout": "main\n",
+    "stderr": "",
+    "duration_seconds": 0.015
+  },
+  "remote": {
+    "command": [
+      "git",
+      "remote",
+      "get-url",
+      "origin"
+    ],
+    "returncode": 0,
+    "stdout": "https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura.git\n",
+    "stderr": "",
+    "duration_seconds": 0.023
+  },
+  "log": {
+    "command": [
+      "git",
+      "log",
+      "-5",
+      "--oneline",
+      "--decorate"
+    ],
+    "returncode": 0,
+    "stdout": "d53d85d (HEAD -> main, origin/main) Add reproducible preview QA and form contracts\n7652a56 Apply Codex accessibility and asset audit fixes\n76a0307 Record Codex findings for Barbara audit\nc161f5e Harden form accessibility and lazy image loading\n004da93 Record Antigravity re-audit and final fixes\n",
+    "stderr": "",
+    "duration_seconds": 0.019
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "duration_seconds": 0.018
+  }
+}

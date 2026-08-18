@@ -1201,3 +1201,29 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Decisão:** correções aprovadas para preview técnico; produção oficial continua fora do escopo.
 - **Status:** aprovado.
 
+## REG-025 — Findings Codex finais e fechamento da rodada
+
+- **Etapa:** revisão pré-entrega / fechamento de auditoria.
+- **Run:** `audits/20260818-barbara-qa-005`.
+- **Resultado:** Codex `pass_with_findings`; Antigravity `pass`; browser capture `pass` em dois viewports; HTTP `[200, 200, 200, 200]`.
+- **CODEX-001:** PNG sem variantes modernas — mantido como backlog `PEND-018`, pois os assets são exploratórios e a otimização WebP/AVIF deve ser feita em uma etapa própria de performance.
+- **CODEX-002:** fonte pré-minificada — melhoria de manutenção não bloqueante; paridade entre fonte e `preview-dist` agora é verificada por `npm run qa:parity`.
+- **CODEX-003:** documentação do teste corrigida; `package.json` e `package-lock.json` declaram Playwright `1.62.1`; `npm ci --ignore-scripts && npm run qa:preview` passou.
+- **Teste adicional:** `npm run qa:parity` passou com 3 superfícies sincronizadas e 3 assets publicados verificados.
+- **Status:** rodada aprovada com backlog de performance documentado.
+
+## TEST-024 — QA executável reproduzível
+
+- **Comando:** `npm run qa:preview`.
+- **Resultado:** `status=pass`, desktop/mobile, lazy images, formulário, menu e interações.
+- **Comando:** `npm run qa:parity`.
+- **Resultado:** `status=pass`, `synchronized=3`, `assets_checked=3`.
+- **Status:** aprovado.
+
+## PEND-018 — Otimização de imagens raster
+
+- **Escopo futuro:** gerar WebP/AVIF e `srcset/sizes` para imagens autorizadas/aprovadas.
+- **Motivo de não aplicar agora:** preview exploratório, assets gerados ainda sujeitos a substituição e sem necessidade de alterar o pipeline de proveniência nesta rodada.
+- **Critério de fechamento:** medir peso antes/depois, validar qualidade visual, `naturalWidth`, formatos, cache, mobile e reauditoria.
+- **Status:** não bloqueante para preview técnico; pendente para performance avançada.
+
