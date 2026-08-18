@@ -106,18 +106,27 @@
     nome: (value) => value.trim().length >= 2 ? '' : 'Digite ao menos 2 caracteres.',
     email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? '' : 'Use um e-mail válido para o exercício.',
     mensagem: (value) => value.trim().length >= 12 ? '' : 'Escreva uma pista com pelo menos 12 caracteres.'
-  };
-  if (form) {
+    };
+    if (form) {
     Object.keys(rules).forEach((name) => {
-      const field = form.elements[name];
-      if (!field) return;
-      field.addEventListener('input', () => {
-        const message = rules[name](field.value);
-        const error = errorFor(name);
-        if (error) error.textContent = message;
-        field.setAttribute('aria-invalid', String(Boolean(message)));
-      });
+    const field = form.elements[name];
+    if (!field) return;
+    field.addEventListener('input', () => {
+      const message = rules[name](field.value);
+      const error = errorFor(name);
+      if (error) error.textContent = message;
+      field.setAttribute('aria-invalid', String(Boolean(message)));
     });
+    });
+    const consent = form.elements.consentimento;
+    const updateConsentError = () => {
+    const message = consent.checked ? '' : 'Confirme que esta é uma demonstração local.';
+    const error = errorFor('consentimento');
+    if (error) error.textContent = message;
+    consent.setAttribute('aria-invalid', String(Boolean(message)));
+    return message;
+    };
+    if (consent) consent.addEventListener('change', updateConsentError);
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       let valid = true;
@@ -129,8 +138,8 @@
         field.setAttribute('aria-invalid', String(Boolean(message)));
         if (message) valid = false;
       });
-      const consent = form.elements.consentimento;
-      if (!consent.checked) valid = false;
+      const consentMessage = updateConsentError();
+      if (consentMessage) valid = false;
       if (!valid) {
         formStatus.textContent = 'Revise os campos destacados antes de validar.';
         formStatus.className = 'form-status is-error';
