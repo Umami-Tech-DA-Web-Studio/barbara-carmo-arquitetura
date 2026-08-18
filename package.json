@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "description": "QA executável do preview exploratório Barbara Carmo Arquitetura",
   "scripts": {
-    "qa:preview": "node testes/redesign-02/verify_preview.cjs"
+    "qa:preview": "node testes/redesign-02/verify_preview.cjs",
+    "qa:parity": "node testes/redesign-02/verify_parity.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"
