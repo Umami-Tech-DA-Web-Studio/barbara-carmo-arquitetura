@@ -1109,9 +1109,9 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Data/hora:** 17/08/2026, 21:20 BRT.
 - **Pré-requisitos:** conta GitHub autenticada; remote `https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura.git`; conta Cloudflare canônica `24da8c756c6d6b7702b238034329966a` confirmada por `wrangler whoami`.
 - **Correção aplicada antes da promoção:** `lang="pt-BR"` validado no artefato; `preview-dist` sincronizado com o mockup e com todos os assets da raiz efetivamente publicada; README corrigido para registrar ComfyUI e Cloudflare Workers AI como origens documentadas.
-- **Commit publicado:** `6ec6489ff46a95f83ac748b4a71d8c402fceed20` na branch `main`.
-- **Push:** `main -> origin/main` concluído; `git ls-remote` retornou `6ec6489ff46a95f83ac748b4a71d8c402fceed20`.
-- **Deploy:** Cloudflare Pages `barbara-carmo-arquitetura`, branch `redesign-20260817`, source `6ec6489`; deployment `https://4d730cec.barbara-carmo-arquitetura-4ga.pages.dev`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`.
+- **Commit publicado:** `7279db149f506fceb07e7b94f0a7386b1cc29260` na branch `main`.
+- **Push:** `main -> origin/main` concluído; `git ls-remote` retornou `7279db149f506fceb07e7b94f0a7386b1cc29260`.
+- **Deploy:** Cloudflare Pages `barbara-carmo-arquitetura`, branch `redesign-20260817`, source `7279db1`; deployment final `https://3d8886da.barbara-carmo-arquitetura-4ga.pages.dev`; alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev`.
 - **Proteções:** `noindex,nofollow`, `robots.txt` com `Disallow: /`, sem domínio oficial e sem contato comercial.
 - **Status:** execução concluída; aguarda evidência externa registrada em TEST-020.
 
@@ -1132,4 +1132,14 @@ A etapa de planejamento só poderá virar desenvolvimento após autorização e 
 - **Fora da etapa atual:** domínio oficial, DNS, conteúdo e identidade finais, dados reais, revisão profissional, publicação oficial e pós-lançamento.
 - **Próxima ação:** após aceite contratual, definir escopo avançado, conteúdo aprovado, domínio oficial e critérios de produção.
 - **Status:** pendente não bloqueante para o preview técnico; bloqueante para produção oficial.
+
+## TEST-021 — Smoke final pós-redeploy rastreado ao HEAD
+
+- **Etapa:** revisão pré-entrega / fechamento de preview técnico.
+- **Data/hora:** 17/08/2026, após o deploy final do commit `7279db1`.
+- **Alvo:** alias `https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/`.
+- **Resultado:** HTTP 200 com User-Agent de navegador; HTML final contém título Barbara, `lang="pt-BR"` e `noindex, nofollow`.
+- **QA repetido:** Playwright Chromium desktop/mobile passou novamente com os mesmos critérios de TEST-020: seis imagens carregadas, zero console/pageerror/requestfailed, overflow falso, reduced motion, filtro/estado vazio, modal e menu mobile.
+- **Decisão:** preview técnico considerado publicado e atualizado no GitHub/Cloudflare; produção oficial permanece fora do escopo atual.
+- **Status:** aprovado.
 
