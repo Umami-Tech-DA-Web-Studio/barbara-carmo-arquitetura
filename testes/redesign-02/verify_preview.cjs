@@ -1,7 +1,6 @@
 const assert = require('node:assert/strict');
 
-const playwrightModule = process.env.PLAYWRIGHT_MODULE;
-if (!playwrightModule) throw new Error('PLAYWRIGHT_MODULE is required');
+const playwrightModule = process.env.PLAYWRIGHT_MODULE || 'playwright';
 const { chromium } = require(playwrightModule);
 const base = process.env.BASE_URL || 'http://127.0.0.1:8330/';
 

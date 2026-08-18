@@ -1,0 +1,12 @@
+{
+  "name": "barbara-carmo-arquitetura-preview",
+  "private": true,
+  "version": "0.1.0",
+  "description": "QA executável do preview exploratório Barbara Carmo Arquitetura",
+  "scripts": {
+    "qa:preview": "node testes/redesign-02/verify_preview.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

@@ -1,5 +1,6 @@
 # Local tooling caches
 .wrangler/
+node_modules/
 
 # Browser QA artifacts
 playwright-report/

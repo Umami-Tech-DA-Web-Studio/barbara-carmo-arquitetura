@@ -1,0 +1,105 @@
+{
+  "count": 20,
+  "files": [
+    {
+      "path": "preview-dist/index.html",
+      "bytes": 14091,
+      "suffix": ".html"
+    },
+    {
+      "path": "preview-dist/styles.css",
+      "bytes": 15962,
+      "suffix": ".css"
+    },
+    {
+      "path": "preview-dist/app.js",
+      "bytes": 8112,
+      "suffix": ".js"
+    },
+    {
+      "path": "preview-dist/favicon.svg",
+      "bytes": 262,
+      "suffix": ".svg"
+    },
+    {
+      "path": "preview-dist/assets/generated/barbara-courtyard_00001_.png",
+      "bytes": 405004,
+      "suffix": ".png"
+    },
+    {
+      "path": "preview-dist/assets/generated/barbara-interior_00001_.png",
+      "bytes": 345009,
+      "suffix": ".png"
+    },
+    {
+      "path": "preview-dist/assets/generated/barbara-hero_00001_.png",
+      "bytes": 593363,
+      "suffix": ".png"
+    },
+    {
+      "path": "opendesign/index.html",
+      "bytes": 8720,
+      "suffix": ".html"
+    },
+    {
+      "path": "opendesign/manifest.json",
+      "bytes": 1113,
+      "suffix": ".json"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/index.html",
+      "bytes": 14091,
+      "suffix": ".html"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/styles.css",
+      "bytes": 15962,
+      "suffix": ".css"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/app.js",
+      "bytes": 8112,
+      "suffix": ".js"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/favicon.svg",
+      "bytes": 262,
+      "suffix": ".svg"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-courtyard_00001_.png",
+      "bytes": 405004,
+      "suffix": ".png"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-cloudflare-courtyard.jpg",
+      "bytes": 67921,
+      "suffix": ".jpg"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-interior_00001_.png",
+      "bytes": 345009,
+      "suffix": ".png"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-cloudflare-hero.jpg",
+      "bytes": 41815,
+      "suffix": ".jpg"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-cloudflare-interior.jpg",
+      "bytes": 68202,
+      "suffix": ".jpg"
+    },
+    {
+      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-hero_00001_.png",
+      "bytes": 593363,
+      "suffix": ".png"
+    },
+    {
+      "path": "opendesign/design-systems/barbara-carmo-editorial/tokens/colors_and_type.css",
+      "bytes": 1043,
+      "suffix": ".css"
+    }
+  ]
+}
