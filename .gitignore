@@ -1,0 +1,6 @@
+# Local tooling caches
+.wrangler/
+
+# Browser QA artifacts
+playwright-report/
+test-results/
