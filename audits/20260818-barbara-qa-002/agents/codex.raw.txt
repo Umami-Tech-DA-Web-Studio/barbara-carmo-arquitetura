@@ -1,0 +1,543 @@
+{
+  "agent": "codex",
+  "verdict": "pass_with_findings",
+  "strengths": [
+    "HTML semântico consistente: um H1, main, navegação, sections nomeadas, labels de formulário e dialog.",
+    "Fonte e artefato local estão idênticos por hash para HTML, CSS e JavaScript.",
+    "Preview publicado respondeu 200 para HTML, CSS, JS e robots.txt; browser reportou zero erros de console, page errors ou requests falhos.",
+    "Noindex/nofollow, aviso de preview e identificação das imagens geradas estão presentes.",
+    "JavaScript não usa fetch, storage, cookies ou integrações externas; o formulário é demonstrativo.",
+    "Há skip-link, foco visível, aria-expanded, aria-pressed, suporte a reduced-motion e restauração de foco no modal/menu."
+  ],
+  "findings": [
+    {
+      "id": "CODEX-001",
+      "severity": "medium",
+      "category": "accessibility",
+      "title": "Erros do formulário não estão associados programaticamente aos campos",
+      "evidence": {
+        "type": "line",
+        "path": "preview-dist/index.html",
+        "locator": "linha 115, form[data-briefing-form]; preview-dist/app.js:124-138",
+        "quote_or_observation": "Os elementos small.field-error não possuem id e os campos recebem aria-invalid, mas não aria-describedby. O checkbox consentimento também não recebe aria-invalid nem mensagem específica."
+      },
+      "impact": "Tecnologias assistivas podem anunciar que um campo é inválido sem expor o texto do erro correspondente; o consentimento inválido só recebe foco e uma mensagem genérica.",
+      "recommendation": "Atribuir ids únicos aos erros, referenciá-los com aria-describedby, marcar o checkbox inválido e fornecer mensagem associada ao consentimento.",
+      "confidence": 0.99,
+      "auto_fixable": true,
+      "requires_human_approval": false,
+      "regression_test": "Submeter o formulário vazio e verificar que cada campo inválido referencia um erro visível via aria-describedby; verificar também o estado inválido do checkbox."
+    },
+    {
+      "id": "CODEX-002",
+      "severity": "medium",
+      "category": "performance",
+      "title": "Imagens abaixo da dobra são carregadas sem lazy loading",
+      "evidence": {
+        "type": "line",
+        "path": "preview-dist/index.html",
+        "locator": "linhas 53, 83, 90, 97, 114 e 121",
+        "quote_or_observation": "As seis imagens possuem src, alt e dimensões, mas nenhuma possui loading=\"lazy\" ou decoding=\"async\". Os três PNGs principais somam 1.343.376 bytes no inventário."
+      },
+      "impact": "A primeira renderização pode carregar imagens de projetos, briefing e modal antes de serem necessárias, aumentando transferência e custo de decodificação.",
+      "recommendation": "Manter o hero eager e aplicar loading=\"lazy\"/decoding=\"async\" às imagens abaixo da dobra; considerar srcset e formatos modernos.",
+      "confidence": 0.96,
+      "auto_fixable": true,
+      "requires_human_approval": false,
+      "regression_test": "Medir a carga inicial em viewport desktop e confirmar que imagens abaixo da dobra não são requisitadas antes de se aproximarem da viewport."
+    },
+    {
+      "id": "CODEX-003",
+      "severity": "low",
+      "category": "performance",
+      "title": "Assets candidatos não utilizados estão incluídos no artefato publicado",
+      "evidence": {
+        "type": "file",
+        "path": "audits/20260818-barbara-qa-002/input/inventory.json",
+        "locator": "linhas 30-47 e 90-107; busca de referências em preview-dist/index.html e preview-dist/app.js",
+        "quote_or_observation": "barbara-cloudflare-courtyard.jpg, barbara-cloudflare-hero.jpg e barbara-cloudflare-interior.jpg aparecem no preview-dist, mas têm zero referências no HTML/JavaScript publicado."
+      },
+      "impact": "O artefato transporta aproximadamente 177.938 bytes de candidatos não usados e mantém ambígua a separação entre material aplicado e material experimental.",
+      "recommendation": "Excluir candidatos do diretório publicado, preservando-os somente no arquivo de exploração/documentação.",
+      "confidence": 1.0,
+      "auto_fixable": false,
+      "requires_human_approval": true,
+      "regression_test": "Comparar a lista de assets publicados com as referências efetivamente encontradas em HTML, CSS e JavaScript."
+    },
+    {
+      "id": "CODEX-004",
+      "severity": "low",
+      "category": "code",
+      "title": "Fonte HTML/CSS está pré-minificada e dificulta manutenção",
+      "evidence": {
+        "type": "line",
+        "path": "preview-dist/styles.css",
+        "locator": "linhas 1-10; preview-dist/index.html:108-121",
+        "quote_or_observation": "O CSS inteiro ocupa dez linhas e várias seções HTML estão condensadas em linhas únicas muito extensas."
+      },
+      "impact": "Revisões de acessibilidade, diffs, localização de regressões e manutenção ficam mais difíceis; fonte e artefato não estão claramente separados.",
+      "recommendation": "Manter HTML/CSS formatados como fonte e minificar somente durante a etapa de publicação.",
+      "confidence": 1.0,
+      "auto_fixable": true,
+      "requires_human_approval": false,
+      "regression_test": "Adicionar formatter/linter e verificar que o build publicado continua funcional após minificação."
+    },
+    {
+      "id": "CODEX-005",
+      "severity": "low",
+      "category": "code",
+      "title": "Não há teste executável versionado para regressões",
+      "evidence": {
+        "type": "test",
+        "path": "testes/redesign-02/summary.json",
+        "locator": "artefatos testes/redesign-02/*.json e inventário versionado sem package.json ou script de teste",
+        "quote_or_observation": "Existem snapshots de resultados e screenshots, mas não há no repositório um comando executável de teste, suíte de interação ou validação automatizada reproduzível."
+      },
+      "impact": "Mudanças futuras podem quebrar menu, filtros, modal, formulário, acessibilidade ou overflow sem uma verificação automática.",
+      "recommendation": "Versionar uma suíte mínima de browser/DOM cobrindo estados interativos, foco, requests, overflow, imagens e noindex.",
+      "confidence": 0.97,
+      "auto_fixable": false,
+      "requires_human_approval": false,
+      "regression_test": "Criar um comando único que execute os cenários de desktop e mobile e falhe em console errors, overflow horizontal, foco perdido, requests inesperados ou ausência de noindex."
+    },
+    {
+      "id": "CODEX-006",
+      "severity": "low",
+      "category": "code",
+      "title": "Snapshot de auditoria não corresponde exatamente ao checkout atual",
+      "evidence": {
+        "type": "test",
+        "path": "audits/20260818-barbara-qa-002/input/git.json",
+        "locator": "linhas 10 e 21, comparado ao git status e HEAD atuais",
+        "quote_or_observation": "O snapshot registra HEAD 053146378046ca8cc538e2dcc62a0fb024cf3251 e checkout limpo; o checkout atual está em 004da9342d76d5860dc7f9e0e3977b3b2e88772d e contém o arquivo não rastreado audits/20260818-barbara-qa-002/input/codex.prompt.md. A comparação confirmou que as superfícies do site não mudaram entre os commits."
+      },
+      "impact": "A auditoria não é totalmente reproduzível apenas pelo manifest sem considerar a diferença de commit e os arquivos de entrada gerados posteriormente.",
+      "recommendation": "Registrar o SHA após gerar todas as entradas da auditoria ou excluir arquivos temporários do checkout antes de capturar o estado.",
+      "confidence": 1.0,
+      "auto_fixable": false,
+      "requires_human_approval": false,
+      "regression_test": "Fazer o runner validar que o SHA capturado coincide com o checkout auditado e que arquivos temporários estão explicitamente excluídos ou listados."
+    }
+  ],
+  "uncertainties": [
+    "A evidência HTTP registra status, content-type e apenas 512 bytes de amostra; não há hash do corpo publicado. A paridade local entre fonte e preview-dist foi confirmada, mas a equivalência criptográfica com o preview remoto não.",
+    "Os headers de segurança como CSP, HSTS, Referrer-Policy e X-Content-Type-Options não foram capturados; não é possível confirmar presença ou ausência.",
+    "A decisão de uso comercial das imagens geradas, identidade visual, serviços, região e copy permanece pendente de aprovação humana."
+  ],
+  "needs_human_decision": [
+    "Aprovar conteúdo, identidade e assets finais antes de qualquer publicação comercial.",
+    "Decidir se o formulário demonstrativo continuará no produto final; em produção, ele exigirá fluxo real de privacidade, retenção e envio."
+  ]
+}
+
+Síntese: o preview está tecnicamente sólido e visualmente consistente, com boas salvaguardas de conteúdo e nenhum erro de execução observado. Os principais ajustes são acessibilidade dos erros do formulário, carregamento de imagens abaixo da dobra e melhoria da disciplina de fonte/testes. A auditoria não está bloqueada, mas a equivalência direta com o corpo remoto e os headers de segurança não foi comprovada pela evidência fornecida.
+
+
+
+--- STDERR ---
+atus ---
+## main...origin/main
+?? audits/20260818-barbara-qa-002/input/codex.prompt.md
+004da9342d76d5860dc7f9e0e3977b3b2e88772d
+004da9342d76d5860dc7f9e0e3977b3b2e88772d
+Record Antigravity re-audit and final fixes
+2026-08-17T23:51:29-03:00
+--- HTML structure counts ---
+h1=1 h2=5 form=1 button=11 img=6 dialog=1
+--- suspicious external/network APIs ---
+opendesign/mockups/barbara-carmo-prospeccao/favicon.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BC">
+preview-dist/favicon.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BC">
+opendesign/mockups/barbara-carmo-prospeccao/index.html:9:  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+opendesign/mockups/barbara-carmo-prospeccao/index.html:11:  <link rel="stylesheet" href="./styles.css?v=redesign-02">
+preview-dist/index.html:9:  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+preview-dist/index.html:11:  <link rel="stylesheet" href="./styles.css?v=redesign-02">
+
+exec
+/bin/zsh -lc "nl -ba .gitignore | sed -n '1,200p'; printf '%s\\n' '--- current untracked prompt ---'; nl -ba audits/20260818-barbara-qa-002/input/codex.prompt.md | sed -n '1,220p'; printf '%s\\n' '--- last commit file list for site surfaces ---'; git diff HEAD"'^ HEAD -- preview-dist opendesign/mockups/barbara-carmo-prospeccao assets/generated | sed -n '"'1,260p'" in /Users/raphael/Documents/Umami Tech/Método de Sites/2 - Documentações por projeto/Trilha A - Sites profissionais/Projeto - Barbara Carmo Arquitetura - Prospecção
+ succeeded in 13ms:
+exec
+/bin/zsh -lc "nl -ba audits/20260818-barbara-qa-002/input/inventory.json | sed -n '1,180p'; nl -ba audits/20260818-barbara-qa-002/input/git.json | sed -n '1,120p'; nl -ba audits/20260818-barbara-qa-002/input/http.json | sed -n '1,120p'" in /Users/raphael/Documents/Umami Tech/Método de Sites/2 - Documentações por projeto/Trilha A - Sites profissionais/Projeto - Barbara Carmo Arquitetura - Prospecção
+ succeeded in 0ms:
+     1	{
+     2	  "count": 23,
+     3	  "files": [
+     4	    {
+     5	      "path": "preview-dist/index.html",
+     6	      "bytes": 13526,
+     7	      "suffix": ".html"
+     8	    },
+     9	    {
+    10	      "path": "preview-dist/styles.css",
+    11	      "bytes": 15957,
+    12	      "suffix": ".css"
+    13	    },
+    14	    {
+    15	      "path": "preview-dist/app.js",
+    16	      "bytes": 7545,
+    17	      "suffix": ".js"
+    18	    },
+    19	    {
+    20	      "path": "preview-dist/favicon.svg",
+    21	      "bytes": 262,
+    22	      "suffix": ".svg"
+    23	    },
+    24	    {
+    25	      "path": "preview-dist/assets/generated/barbara-courtyard_00001_.png",
+    26	      "bytes": 405004,
+    27	      "suffix": ".png"
+    28	    },
+    29	    {
+    30	      "path": "preview-dist/assets/generated/barbara-cloudflare-courtyard.jpg",
+    31	      "bytes": 67921,
+    32	      "suffix": ".jpg"
+    33	    },
+    34	    {
+    35	      "path": "preview-dist/assets/generated/barbara-interior_00001_.png",
+    36	      "bytes": 345009,
+    37	      "suffix": ".png"
+    38	    },
+    39	    {
+    40	      "path": "preview-dist/assets/generated/barbara-cloudflare-hero.jpg",
+    41	      "bytes": 41815,
+    42	      "suffix": ".jpg"
+    43	    },
+    44	    {
+    45	      "path": "preview-dist/assets/generated/barbara-cloudflare-interior.jpg",
+    46	      "bytes": 68202,
+    47	      "suffix": ".jpg"
+    48	    },
+    49	    {
+    50	      "path": "preview-dist/assets/generated/barbara-hero_00001_.png",
+    51	      "bytes": 593363,
+    52	      "suffix": ".png"
+    53	    },
+    54	    {
+    55	      "path": "opendesign/index.html",
+    56	      "bytes": 8720,
+    57	      "suffix": ".html"
+    58	    },
+    59	    {
+    60	      "path": "opendesign/manifest.json",
+    61	      "bytes": 1113,
+    62	      "suffix": ".json"
+    63	    },
+    64	    {
+    65	      "path": "opendesign/mockups/barbara-carmo-prospeccao/index.html",
+    66	      "bytes": 13526,
+    67	      "suffix": ".html"
+    68	    },
+    69	    {
+    70	      "path": "opendesign/mockups/barbara-carmo-prospeccao/styles.css",
+    71	      "bytes": 15957,
+    72	      "suffix": ".css"
+    73	    },
+    74	    {
+    75	      "path": "opendesign/mockups/barbara-carmo-prospeccao/app.js",
+    76	      "bytes": 7545,
+    77	      "suffix": ".js"
+    78	    },
+    79	    {
+    80	      "path": "opendesign/mockups/barbara-carmo-prospeccao/favicon.svg",
+    81	      "bytes": 262,
+    82	      "suffix": ".svg"
+    83	    },
+    84	    {
+    85	      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-courtyard_00001_.png",
+    86	      "bytes": 405004,
+    87	      "suffix": ".png"
+    88	    },
+    89	    {
+    90	      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-cloudflare-courtyard.jpg",
+    91	      "bytes": 67921,
+    92	      "suffix": ".jpg"
+    93	    },
+    94	    {
+    95	      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-interior_00001_.png",
+    96	      "bytes": 345009,
+    97	      "suffix": ".png"
+    98	    },
+    99	    {
+   100	      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-cloudflare-hero.jpg",
+   101	      "bytes": 41815,
+   102	      "suffix": ".jpg"
+   103	    },
+   104	    {
+   105	      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-cloudflare-interior.jpg",
+   106	      "bytes": 68202,
+   107	      "suffix": ".jpg"
+   108	    },
+   109	    {
+   110	      "path": "opendesign/mockups/barbara-carmo-prospeccao/assets/generated/barbara-hero_00001_.png",
+   111	      "bytes": 593363,
+   112	      "suffix": ".png"
+   113	    },
+   114	    {
+   115	      "path": "opendesign/design-systems/barbara-carmo-editorial/tokens/colors_and_type.css",
+   116	      "bytes": 1043,
+   117	      "suffix": ".css"
+   118	    }
+   119	  ]
+   120	}
+     1	{
+     2	  "status": {
+     3	    "command": [
+     4	      "git",
+     5	      "status",
+     6	      "--short",
+     7	      "--branch"
+     8	    ],
+     9	    "returncode": 0,
+    10	    "stdout": "## main...origin/main\n",
+    11	    "stderr": "",
+    12	    "duration_seconds": 0.06
+    13	  },
+    14	  "head": {
+    15	    "command": [
+    16	      "git",
+    17	      "rev-parse",
+    18	      "HEAD"
+    19	    ],
+    20	    "returncode": 0,
+    21	    "stdout": "053146378046ca8cc538e2dcc62a0fb024cf3251\n",
+    22	    "stderr": "",
+    23	    "duration_seconds": 0.021
+    24	  },
+    25	  "branch": {
+    26	    "command": [
+    27	      "git",
+    28	      "branch",
+    29	      "--show-current"
+    30	    ],
+    31	    "returncode": 0,
+    32	    "stdout": "main\n",
+    33	    "stderr": "",
+    34	    "duration_seconds": 0.022
+    35	  },
+    36	  "remote": {
+    37	    "command": [
+    38	      "git",
+    39	      "remote",
+    40	      "get-url",
+    41	      "origin"
+    42	    ],
+    43	    "returncode": 0,
+    44	    "stdout": "https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura.git\n",
+    45	    "stderr": "",
+    46	    "duration_seconds": 0.024
+    47	  },
+    48	  "log": {
+    49	    "command": [
+    50	      "git",
+    51	      "log",
+    52	      "-5",
+    53	      "--oneline",
+    54	      "--decorate"
+    55	    ],
+    56	    "returncode": 0,
+    57	    "stdout": "0531463 (HEAD -> main, origin/main) Apply Antigravity QA fixes\nc772cd1 Add multi-agent audit runner evidence\n791564d Record final preview redeploy smoke test\n7279db1 Ignore local Wrangler cache\n6cda811 Record authorized preview deployment and QA\n",
+    58	    "stderr": "",
+    59	    "duration_seconds": 0.03
+    60	  },
+    61	  "diff_check": {
+    62	    "command": [
+    63	      "git",
+    64	      "diff",
+    65	      "--check"
+    66	    ],
+    67	    "returncode": 0,
+    68	    "stdout": "",
+    69	    "stderr": "",
+    70	    "duration_seconds": 0.023
+    71	  }
+    72	}
+     1	{
+     2	  "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/",
+     3	  "observed_at": "2026-08-17T23:46:27.351345-03:00",
+     4	  "requests": [
+     5	    {
+     6	      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev",
+     7	      "status": 200,
+     8	      "content_type": "text/html; charset=utf-8",
+     9	      "cache_control": "public, max-age=0, must-revalidate",
+    10	      "sample_bytes": 512
+    11	    },
+    12	    {
+    13	      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/robots.txt",
+    14	      "status": 200,
+    15	      "content_type": "text/plain; charset=utf-8",
+    16	      "cache_control": "public, max-age=0, must-revalidate",
+    17	      "sample_bytes": 26
+    18	    },
+    19	    {
+    20	      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/styles.css",
+    21	      "status": 200,
+    22	      "content_type": "text/css; charset=utf-8",
+    23	      "cache_control": "public, max-age=0, must-revalidate",
+    24	      "sample_bytes": 512
+    25	    },
+    26	    {
+    27	      "url": "https://redesign-20260817.barbara-carmo-arquitetura-4ga.pages.dev/app.js",
+    28	      "status": 200,
+    29	      "content_type": "application/javascript",
+    30	      "cache_control": "public, max-age=0, must-revalidate",
+    31	      "sample_bytes": 512
+    32	    }
+    33	  ]
+    34	}
+
+exec
+/bin/zsh -lc "printf '%s\\n' '--- site surface diff between evidence HEAD and current HEAD ---'; git diff --stat 053146378046ca8cc538e2dcc62a0fb024cf3251 HEAD -- preview-dist opendesign/mockups/barbara-carmo-prospeccao assets/generated; printf '%s\\n' '--- current vs evidence hashes ---'; for f in preview-dist/index.html preview-dist/styles.css preview-dist/app.js preview-dist/assets/generated/barbara-hero_00001_.png; do printf '%s ' \""'$f"; git show 053146378046ca8cc538e2dcc62a0fb024cf3251:"$f" 2>/dev/null | shasum | cut -d'"' ' -f1; shasum \""'$f" | cut -d'"' ' -f1; done; printf '%s\\n' '--- evidence commit existence ---'; git cat-file -t 053146378046ca8cc538e2dcc62a0fb024cf3251; printf '%s\\n' '--- current status porcelain ---'; git status --short --branch" in /Users/raphael/Documents/Umami Tech/Método de Sites/2 - Documentações por projeto/Trilha A - Sites profissionais/Projeto - Barbara Carmo Arquitetura - Prospecção
+ succeeded in 376ms:
+--- current vs evidence hashes ---
+preview-dist/index.html b3e6383f2fa454da81c733c01648d901ba7b0156
+b3e6383f2fa454da81c733c01648d901ba7b0156
+preview-dist/styles.css 5b3d574bd2c5b9b712f86b407c1d3cfdd9c40166
+5b3d574bd2c5b9b712f86b407c1d3cfdd9c40166
+preview-dist/app.js 4f5c709a847f2544d0c9e1e82f4e583a8ecefdf0
+4f5c709a847f2544d0c9e1e82f4e583a8ecefdf0
+preview-dist/assets/generated/barbara-hero_00001_.png 6182267d380c7f79229722abdc33d0392b59362c
+6182267d380c7f79229722abdc33d0392b59362c
+--- evidence commit existence ---
+commit
+--- current status porcelain ---
+## main...origin/main
+?? audits/20260818-barbara-qa-002/input/codex.prompt.md
+
+codex
+{
+  "agent": "codex",
+  "verdict": "pass_with_findings",
+  "strengths": [
+    "HTML semântico consistente: um H1, main, navegação, sections nomeadas, labels de formulário e dialog.",
+    "Fonte e artefato local estão idênticos por hash para HTML, CSS e JavaScript.",
+    "Preview publicado respondeu 200 para HTML, CSS, JS e robots.txt; browser reportou zero erros de console, page errors ou requests falhos.",
+    "Noindex/nofollow, aviso de preview e identificação das imagens geradas estão presentes.",
+    "JavaScript não usa fetch, storage, cookies ou integrações externas; o formulário é demonstrativo.",
+    "Há skip-link, foco visível, aria-expanded, aria-pressed, suporte a reduced-motion e restauração de foco no modal/menu."
+  ],
+  "findings": [
+    {
+      "id": "CODEX-001",
+      "severity": "medium",
+      "category": "accessibility",
+      "title": "Erros do formulário não estão associados programaticamente aos campos",
+      "evidence": {
+        "type": "line",
+        "path": "preview-dist/index.html",
+        "locator": "linha 115, form[data-briefing-form]; preview-dist/app.js:124-138",
+        "quote_or_observation": "Os elementos small.field-error não possuem id e os campos recebem aria-invalid, mas não aria-describedby. O checkbox consentimento também não recebe aria-invalid nem mensagem específica."
+      },
+      "impact": "Tecnologias assistivas podem anunciar que um campo é inválido sem expor o texto do erro correspondente; o consentimento inválido só recebe foco e uma mensagem genérica.",
+      "recommendation": "Atribuir ids únicos aos erros, referenciá-los com aria-describedby, marcar o checkbox inválido e fornecer mensagem associada ao consentimento.",
+      "confidence": 0.99,
+      "auto_fixable": true,
+      "requires_human_approval": false,
+      "regression_test": "Submeter o formulário vazio e verificar que cada campo inválido referencia um erro visível via aria-describedby; verificar também o estado inválido do checkbox."
+    },
+    {
+      "id": "CODEX-002",
+      "severity": "medium",
+      "category": "performance",
+      "title": "Imagens abaixo da dobra são carregadas sem lazy loading",
+      "evidence": {
+        "type": "line",
+        "path": "preview-dist/index.html",
+        "locator": "linhas 53, 83, 90, 97, 114 e 121",
+        "quote_or_observation": "As seis imagens possuem src, alt e dimensões, mas nenhuma possui loading=\"lazy\" ou decoding=\"async\". Os três PNGs principais somam 1.343.376 bytes no inventário."
+      },
+      "impact": "A primeira renderização pode carregar imagens de projetos, briefing e modal antes de serem necessárias, aumentando transferência e custo de decodificação.",
+      "recommendation": "Manter o hero eager e aplicar loading=\"lazy\"/decoding=\"async\" às imagens abaixo da dobra; considerar srcset e formatos modernos.",
+      "confidence": 0.96,
+      "auto_fixable": true,
+      "requires_human_approval": false,
+      "regression_test": "Medir a carga inicial em viewport desktop e confirmar que imagens abaixo da dobra não são requisitadas antes de se aproximarem da viewport."
+    },
+    {
+      "id": "CODEX-003",
+      "severity": "low",
+      "category": "performance",
+      "title": "Assets candidatos não utilizados estão incluídos no artefato publicado",
+      "evidence": {
+        "type": "file",
+        "path": "audits/20260818-barbara-qa-002/input/inventory.json",
+        "locator": "linhas 30-47 e 90-107; busca de referências em preview-dist/index.html e preview-dist/app.js",
+        "quote_or_observation": "barbara-cloudflare-courtyard.jpg, barbara-cloudflare-hero.jpg e barbara-cloudflare-interior.jpg aparecem no preview-dist, mas têm zero referências no HTML/JavaScript publicado."
+      },
+      "impact": "O artefato transporta aproximadamente 177.938 bytes de candidatos não usados e mantém ambígua a separação entre material aplicado e material experimental.",
+      "recommendation": "Excluir candidatos do diretório publicado, preservando-os somente no arquivo de exploração/documentação.",
+      "confidence": 1.0,
+      "auto_fixable": false,
+      "requires_human_approval": true,
+      "regression_test": "Comparar a lista de assets publicados com as referências efetivamente encontradas em HTML, CSS e JavaScript."
+    },
+    {
+      "id": "CODEX-004",
+      "severity": "low",
+      "category": "code",
+      "title": "Fonte HTML/CSS está pré-minificada e dificulta manutenção",
+      "evidence": {
+        "type": "line",
+        "path": "preview-dist/styles.css",
+        "locator": "linhas 1-10; preview-dist/index.html:108-121",
+        "quote_or_observation": "O CSS inteiro ocupa dez linhas e várias seções HTML estão condensadas em linhas únicas muito extensas."
+      },
+      "impact": "Revisões de acessibilidade, diffs, localização de regressões e manutenção ficam mais difíceis; fonte e artefato não estão claramente separados.",
+      "recommendation": "Manter HTML/CSS formatados como fonte e minificar somente durante a etapa de publicação.",
+      "confidence": 1.0,
+      "auto_fixable": true,
+      "requires_human_approval": false,
+      "regression_test": "Adicionar formatter/linter e verificar que o build publicado continua funcional após minificação."
+    },
+    {
+      "id": "CODEX-005",
+      "severity": "low",
+      "category": "code",
+      "title": "Não há teste executável versionado para regressões",
+      "evidence": {
+        "type": "test",
+        "path": "testes/redesign-02/summary.json",
+        "locator": "artefatos testes/redesign-02/*.json e inventário versionado sem package.json ou script de teste",
+        "quote_or_observation": "Existem snapshots de resultados e screenshots, mas não há no repositório um comando executável de teste, suíte de interação ou validação automatizada reproduzível."
+      },
+      "impact": "Mudanças futuras podem quebrar menu, filtros, modal, formulário, acessibilidade ou overflow sem uma verificação automática.",
+      "recommendation": "Versionar uma suíte mínima de browser/DOM cobrindo estados interativos, foco, requests, overflow, imagens e noindex.",
+      "confidence": 0.97,
+      "auto_fixable": false,
+      "requires_human_approval": false,
+      "regression_test": "Criar um comando único que execute os cenários de desktop e mobile e falhe em console errors, overflow horizontal, foco perdido, requests inesperados ou ausência de noindex."
+    },
+    {
+      "id": "CODEX-006",
+      "severity": "low",
+      "category": "code",
+      "title": "Snapshot de auditoria não corresponde exatamente ao checkout atual",
+      "evidence": {
+        "type": "test",
+        "path": "audits/20260818-barbara-qa-002/input/git.json",
+        "locator": "linhas 10 e 21, comparado ao git status e HEAD atuais",
+        "quote_or_observation": "O snapshot registra HEAD 053146378046ca8cc538e2dcc62a0fb024cf3251 e checkout limpo; o checkout atual está em 004da9342d76d5860dc7f9e0e3977b3b2e88772d e contém o arquivo não rastreado audits/20260818-barbara-qa-002/input/codex.prompt.md. A comparação confirmou que as superfícies do site não mudaram entre os commits."
+      },
+      "impact": "A auditoria não é totalmente reproduzível apenas pelo manifest sem considerar a diferença de commit e os arquivos de entrada gerados posteriormente.",
+      "recommendation": "Registrar o SHA após gerar todas as entradas da auditoria ou excluir arquivos temporários do checkout antes de capturar o estado.",
+      "confidence": 1.0,
+      "auto_fixable": false,
+      "requires_human_approval": false,
+      "regression_test": "Fazer o runner validar que o SHA capturado coincide com o checkout auditado e que arquivos temporários estão explicitamente excluídos ou listados."
+    }
+  ],
+  "uncertainties": [
+    "A evidência HTTP registra status, content-type e apenas 512 bytes de amostra; não há hash do corpo publicado. A paridade local entre fonte e preview-dist foi confirmada, mas a equivalência criptográfica com o preview remoto não.",
+    "Os headers de segurança como CSP, HSTS, Referrer-Policy e X-Content-Type-Options não foram capturados; não é possível confirmar presença ou ausência.",
+    "A decisão de uso comercial das imagens geradas, identidade visual, serviços, região e copy permanece pendente de aprovação humana."
+  ],
+  "needs_human_decision": [
+    "Aprovar conteúdo, identidade e assets finais antes de qualquer publicação comercial.",
+    "Decidir se o formulário demonstrativo continuará no produto final; em produção, ele exigirá fluxo real de privacidade, retenção e envio."
+  ]
+}
+
+Síntese: o preview está tecnicamente sólido e visualmente consistente, com boas salvaguardas de conteúdo e nenhum erro de execução observado. Os principais ajustes são acessibilidade dos erros do formulário, carregamento de imagens abaixo da dobra e melhoria da disciplina de fonte/testes. A auditoria não está bloqueada, mas a equivalência direta com o corpo remoto e os headers de segurança não foi comprovada pela evidência fornecida.
+
+
+tokens used
+102.974

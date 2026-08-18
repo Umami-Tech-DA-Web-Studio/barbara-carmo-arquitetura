@@ -2,13 +2,14 @@
   "agent": "antigravity",
   "verdict": "pass",
   "strengths": [
-    "Direção de arte e identidade visual de alto padrão: paleta mineral e terrosa (#1c2b27, #f1ede3, #b45e43, #874331) perfeitamente calibrada para arquitetura residencial e design de interiores contemporâneo.",
-    "Hierarquia e tipografia refinadas: contraste sofisticado entre serif clássica (Iowan Old Style / Palatino Linotype) em títulos display e sans-serif limpa (Avenir Next) no corpo, pontuada por microdados monoespaçados (SFMono).",
-    "Composição espacial equilibrada e ritmo editorial: grid com quebras assimétricas controladas em desktop e adaptação fluida em mobile (390px) com zero overflow horizontal.",
-    "Acessibilidade e microinterações táteis: anel de foco `:focus-visible` visível, suporte completo a `prefers-reduced-motion`, skip-link para navegação por teclado e semântica ARIA consistente em filtros, modal de projeto e formulário demonstrativo.",
-    "Fechamento resiliente do menu mobile: implementação confirmada de listeners para clique fora da área de navegação e acionamento da tecla Escape com restauração de foco no botão disparador.",
-    "Excelente calibração de contraste: uso de `--clay-dark` (#874331) em microtipografias monoespaçadas sobre fundo claro, garantindo taxa de contraste de 5.9:1 (acima do patamar WCAG AA de 4.5:1).",
-    "Rigor e conformidade preventiva de prospecção: presença de badges e carimbos de imagem gerada, aviso de preview no topo e no rodapé e feedback determinístico de formulário local sem persistência de dados."
+    "Direção de arte e identidade visual de alto padrão: paleta mineral e terrosa (#1c2b27, #f1ede3, #b45e43, #874331) perfeitamente calibrada para o nicho de arquitetura residencial e design de interiores contemporâneo autoral.",
+    "Hierarquia e tipografia refinadas: contraste sofisticado entre serif clássica (Iowan Old Style / Palatino Linotype) em títulos display com itálicos destacados e sans-serif limpa (Avenir Next) no corpo de texto, pontuada por microdados monoespaçados (SFMono).",
+    "Composição espacial equilibrada e ritmo editorial: grid com quebras assimétricas controladas e offsets verticais em desktop, emulando publicações de design arquitetônico sem gerar ruído visual.",
+    "Densidade e adaptação mobile impecáveis: linearização harmoniosa em 390px com espaçamentos fluidos, tipografia escalonada via clamp, áreas de toque generosas e ausência absoluta de overflow horizontal.",
+    "Clareza de CTA e microinterações táteis: botões em pílula com setas direcionais, estados de hover elegantes (:hover, :active), anéis de foco :focus-visible nítidos e suporte completo a prefers-reduced-motion.",
+    "Acessibilidade percebida e resiliência de componentes: skip-link no topo, semântica ARIA consistente em filtros e modal de projeto com restauração de foco e fechamento resiliente no menu mobile (click outside e Escape).",
+    "Excelente calibração de contraste: uso de --clay-dark (#874331) em microtipografias monoespaçadas sobre fundo claro, garantindo taxa de contraste de 5.9:1 (acima do patamar WCAG AA de 4.5:1).",
+    "Conformidade preventiva e rigor ético de prospecção: presença destacada da barra de preview no topo, carimbos visuais de imagem gerada nas figuras, disclaimer de responsabilidade no rodapé e feedback determinístico de formulário local sem persistência de dados."
   ],
   "findings": [],
   "uncertainties": [],
@@ -29,6 +30,6 @@
     ],
     "returncode": 0,
     "stderr": "",
-    "duration_seconds": 49.292
+    "duration_seconds": 76.244
   }
 }
