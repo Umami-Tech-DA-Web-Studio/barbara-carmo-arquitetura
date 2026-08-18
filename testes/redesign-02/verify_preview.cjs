@@ -73,16 +73,20 @@ const base = process.env.BASE_URL || 'http://127.0.0.1:8330/';
       assert.equal(await page.locator('#consentimento').getAttribute('aria-invalid'), 'false');
 
       if (viewport.name === 'mobile') {
-        const menu = page.getByRole('button', { name: 'Abrir menu' });
+        const menu = page.locator('[data-menu-toggle]');
         const nav = page.locator('#site-nav');
+        assert.equal(await menu.getAttribute('aria-label'), 'Abrir menu');
         await menu.click();
         assert.equal(await menu.getAttribute('aria-expanded'), 'true');
+        assert.equal(await menu.getAttribute('aria-label'), 'Fechar menu');
         await page.keyboard.press('Escape');
         assert.equal(await menu.getAttribute('aria-expanded'), 'false');
+        assert.equal(await menu.getAttribute('aria-label'), 'Abrir menu');
         assert.equal(await page.evaluate(() => document.activeElement?.matches('[data-menu-toggle]')), true);
         await menu.click();
         await page.mouse.click(5, 800);
         assert.equal(await menu.getAttribute('aria-expanded'), 'false');
+        assert.equal(await menu.getAttribute('aria-label'), 'Abrir menu');
         assert.equal(await nav.getAttribute('class').then(value => value.includes('is-open')), false);
       }
       assert.equal(consoleErrors.length, 0, consoleErrors.join('\n'));

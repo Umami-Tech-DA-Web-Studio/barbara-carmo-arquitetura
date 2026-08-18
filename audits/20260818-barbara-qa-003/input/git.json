@@ -1,0 +1,72 @@
+{
+  "status": {
+    "command": [
+      "git",
+      "status",
+      "--short",
+      "--branch"
+    ],
+    "returncode": 0,
+    "stdout": "## main...origin/main\n",
+    "stderr": "",
+    "duration_seconds": 0.017
+  },
+  "head": {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "76a03077066e904023f8aa2b3b2afe655bf41b48\n",
+    "stderr": "",
+    "duration_seconds": 0.009
+  },
+  "branch": {
+    "command": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "returncode": 0,
+    "stdout": "main\n",
+    "stderr": "",
+    "duration_seconds": 0.01
+  },
+  "remote": {
+    "command": [
+      "git",
+      "remote",
+      "get-url",
+      "origin"
+    ],
+    "returncode": 0,
+    "stdout": "https://github.com/Umami-Tech-DA-Web-Studio/barbara-carmo-arquitetura.git\n",
+    "stderr": "",
+    "duration_seconds": 0.009
+  },
+  "log": {
+    "command": [
+      "git",
+      "log",
+      "-5",
+      "--oneline",
+      "--decorate"
+    ],
+    "returncode": 0,
+    "stdout": "76a0307 (HEAD -> main, origin/main) Record Codex findings for Barbara audit\nc161f5e Harden form accessibility and lazy image loading\n004da93 Record Antigravity re-audit and final fixes\n0531463 Apply Antigravity QA fixes\nc772cd1 Add multi-agent audit runner evidence\n",
+    "stderr": "",
+    "duration_seconds": 0.012
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "duration_seconds": 0.009
+  }
+}
